@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Container, List, ListItem } from "@mui/material";
 import { Grid } from '@mui/material';
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -13,18 +13,18 @@ export default function Footer() {
             <Grid container columnSpacing={2}>
                 <Grid item md={4}>Logo</Grid>
                 <Grid item md={4}>
-                    <ul>
-                        {address.map(line => <li key={line}>{line}</li>)}
-                    </ul>
+                    <List>
+                        {address.map(line => <ListItem key={line}>{line}</ListItem>)}
+                    </List>
                     <SocialLinks />
                 </Grid>
                 <Grid item md={4}>
-                    <ul>
-                        <li>Kitchen Hours</li>
-                        <li>{hours.kitchen}</li>
-                        <li>Bar Hours</li>
-                        <li>{hours.bar}</li>
-                    </ul>
+                    <List>
+                        <ListItem>Kitchen Hours</ListItem>
+                        <ListItem>{hours.kitchen}</ListItem>
+                        <ListItem>Bar Hours</ListItem>
+                        <ListItem>{hours.bar}</ListItem>
+                    </List>
                 </Grid>
             </Grid>
         </Container>
