@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { Container, Toolbar } from '@mui/material';
+import { Container, List, ListItem, Toolbar } from '@mui/material';
 import { Link } from "react-router-dom";
 import { RootState } from '../store/store';
 import { useSelector } from 'react-redux';
@@ -22,15 +22,14 @@ export default function Header() {
 
     return (
         <>
-            <ul>
-                <li></li>
-                <li>
+            <List>
+                <ListItem>
                     <a href={'tel:' + ui.phone}>{ui.phone}</a>
-                </li>
-                <li>
+                </ListItem>
+                <ListItem>
                     <a href={'mailto:' + ui.email}>{ui.email}</a>
-                </li>
-            </ul>
+                </ListItem>
+            </List>
             <img alt={ui.name} />
             <Toolbar className="navigation">
                 {links !== null ? links?.map(({ label, link, children }, index) => {

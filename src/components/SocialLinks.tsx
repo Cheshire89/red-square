@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { SocialIcon } from 'react-social-icons'
+import { Link, List, ListItem } from "@mui/material";
 
 
 export default function SocialLinks() {
@@ -7,12 +9,14 @@ export default function SocialLinks() {
     const social = useSelector((state: RootState) => state.ui.social);
 
     return (
-        <ul>
+        <List>
             {Object.keys(social).map((key) => (
-                <li>
-                    <a href={social[key]} title={`${name} ${key} link`}>Link</a>
-                </li>
+                <ListItem>
+                    <Link href={social[key]} title={`${name} ${key}`}>
+                        <SocialIcon url={social[key]}></SocialIcon>
+                    </Link>
+                </ListItem>
             ))}
-        </ul>
+        </List>
     )
 };
