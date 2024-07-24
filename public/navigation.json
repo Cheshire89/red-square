@@ -1,0 +1,46 @@
+[
+    {
+        "label": "About",
+        "link": "about"
+    },
+    {
+        "label": "Food",
+        "link": "food",
+        "children": [
+            {
+                "label": "Dinner",
+                "link": "menu/dinner"
+            },
+            {
+                "label": "Dessert",
+                "link": "menu/dessert"
+            }
+        ]
+    },
+    {
+        "label": "Bar",
+        "link": "bar",
+        "children": [
+            {
+                "label": "Sips+Snacks",
+                "link": "menu/bar"
+            },
+            {
+                "label": "Vodka Bar",
+                "link": "menu/vodka-bar"
+            }
+        ]
+    },
+    {
+        "label": "Reservations",
+        "link": "reservations"
+    },
+    {
+        "label": "Private Parties",
+        "link": "private-parties"
+    },
+    {
+        "label": "Contact",
+        "link": "contact"
+    }
+]

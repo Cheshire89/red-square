@@ -13,6 +13,10 @@ export interface UiState {
     phone: string;
     email: string;
     address: string[];
+    hours: {
+        kitchen: string;
+        bar: string;
+    }
     social: {
         [key: string]: string
     },
