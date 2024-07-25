@@ -1,6 +1,4 @@
 import { Container, Row, Col } from "react-bootstrap";
-import AddressText from "../components/AddressText";
-import SocialLinks from "../components/SocialLinks";
 
 export default function About() {
     return (
