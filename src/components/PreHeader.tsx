@@ -1,15 +1,17 @@
-export default function PreHeader(){
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+
+export default function PreHeader() {
+    const ui = useSelector((state: RootState) => state.ui);
     return (
-        <section>
-            <img alt="logo"/>
-            <ul>
-                <li>About</li>
-                <li>Food</li>
-                <li>Bar</li>
-                <li>Reservations</li>
-                <li>Private Parties</li>
-                <li>Contact</li>
-            </ul>
-        </section>
+        <Navbar className="bg-body-secondary">
+            <Nav className="ms-auto">
+                <Navbar.Text>Make Reservations Online or Call</Navbar.Text>
+                <Nav.Link href={'tel:' + ui.phone}>{ui.phone}</Nav.Link>
+                <Nav.Link href={'mailto:' + ui.email}>{ui.email}</Nav.Link>
+            </Nav>
+        </Navbar>
     )
 };

@@ -45,24 +45,21 @@ export default function Header() {
     }
 
     return (
-        <>
-            <Navbar className="bg-body-tertiary">
-                <Container fluid>
-                    <Navbar.Brand>
-                        <img src={logo} alt={ui.name} width="150px" />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="main-nav" />
-                    <Navbar.Collapse
-                        id="main-nav"
-                        className="justify-content-end"
-                    >
-                        <Nav>
-                            {links !== null && renderLink(links)}
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-
-        </>
+        <Navbar className="bg-body-tertiary">
+            <Container fluid>
+                <Navbar.Brand>
+                    <img src={logo} alt={ui.name} width="150px" />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="main-nav" />
+                <Navbar.Collapse
+                    id="main-nav"
+                    className="justify-content-end"
+                >
+                    <Nav>
+                        {links !== null && renderLink(links)}
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     )
 };

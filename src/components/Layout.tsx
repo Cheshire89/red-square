@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useDispatch } from "react-redux";
 import { setUI } from "../ui/store/ui.slice";
+import PreHeader from "./PreHeader";
 
 export default function Layout() {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ export default function Layout() {
 
     return (
         <main>
+            <PreHeader />
             <Header />
             <Outlet />
             <Footer />
