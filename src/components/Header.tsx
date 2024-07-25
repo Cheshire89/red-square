@@ -9,6 +9,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/RedSquareLogo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from "react-router-dom";
 
 interface NavigationLink {
     label: string;
@@ -48,7 +49,9 @@ export default function Header() {
         <Navbar className="bg-body-tertiary">
             <Container fluid>
                 <Navbar.Brand>
-                    <img className="img-fluid" src={logo} alt={ui.name} style={{ maxHeight: '70px' }} />
+                    <Link to={'/'}>
+                        <img className="img-fluid" src={logo} alt={ui.name} style={{ maxHeight: '70px' }} />
+                    </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="main-nav" />
                 <Navbar.Collapse
