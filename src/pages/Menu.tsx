@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom"
+
 export default function Menu() {
+    const { section } = useParams();
     return (
         <section>
-            <h1>Menu</h1>
+            <h1>{section}</h1>
         </section>
     )
 }

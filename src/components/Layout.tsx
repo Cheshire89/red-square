@@ -12,7 +12,7 @@ export default function Layout() {
     useEffect(() => {
         axios.get('/ui.json')
             .then((res: AxiosResponse) => dispatch(setUI(res.data)))
-    }, [])
+    }, [dispatch])
 
     return (
         <main>

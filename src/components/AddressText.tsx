@@ -6,7 +6,7 @@ export default function AddressText() {
 
     return (
         <p>
-            {ui.address.map(line => line + ' | ')}
+            {ui.address.map(line => <span key={line}>{line}</span>)}
             Phone: <a href={'tel:' + ui.phone}>{ui.phone}</a> |
             Email: <a href={'mailto:' + ui.email}>{ui.email}</a>
         </p>

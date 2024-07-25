@@ -6,6 +6,9 @@ import PrivateParties from './pages/PrivateParties';
 import Layout from './components/Layout';
 
 import { createBrowserRouter } from 'react-router-dom';
+import Menu from './pages/Menu';
+import Bar from './pages/Bar';
+import Food from './pages/Food';
 
 export const router = createBrowserRouter([
     {
@@ -18,6 +21,18 @@ export const router = createBrowserRouter([
             {
                 path: '/about',
                 element: (<About />)
+            },
+            {
+                path: '/bar',
+                element: (<Bar />)
+            },
+            {
+                path: '/food',
+                element: (<Food />)
+            },
+            {
+                path: '/menu/:section',
+                element: (<Menu />)
             },
             {
                 path: '/reservations',
