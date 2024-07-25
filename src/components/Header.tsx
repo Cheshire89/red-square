@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { Container, List, ListItem, Toolbar } from '@mui/material';
-import { Link } from "react-router-dom";
 import { RootState } from '../store/store';
 import { useSelector } from 'react-redux';
+
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from '../assets/RedSquareLogo.jpg';
+import { LinkContainer } from 'react-router-bootstrap';
 
 interface NavigationLink {
     label: string;
@@ -20,22 +25,44 @@ export default function Header() {
             .then((res: AxiosResponse) => setLinks(() => res.data))
     }, [])
 
+    const renderLink = (links: NavigationLink[], nested = false): any => {
+        return links.map(({ link, label, children }, index) => {
+            const ele = !children ?
+                <LinkContainer key={link + index} to={link}>
+                    <Nav.Link>{label}</Nav.Link>
+                </LinkContainer>
+                :
+                <NavDropdown title={label} id={label.toLowerCase() + '-id'}>
+                    {children.map(({ link, label }, index) => (
+                        <LinkContainer key={link + index} to={link}>
+                            <NavDropdown.Item>{label}</NavDropdown.Item>
+                        </LinkContainer>
+                    ))}
+                </NavDropdown>;
+            return ele
+
+        })
+    }
+
     return (
         <>
-            <List>
-                <ListItem>
-                    <a href={'tel:' + ui.phone}>{ui.phone}</a>
-                </ListItem>
-                <ListItem>
-                    <a href={'mailto:' + ui.email}>{ui.email}</a>
-                </ListItem>
-            </List>
-            <img alt={ui.name} />
-            <Toolbar className="navigation">
-                {links !== null ? links?.map(({ label, link, children }, index) => {
-                    return <Link key={link + index} to={link}>{label}</Link>
-                }) : null}
-            </Toolbar>
+            <Navbar className="bg-body-tertiary">
+                <Container fluid>
+                    <Navbar.Brand>
+                        <img src={logo} alt={ui.name} width="150px" />
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="main-nav" />
+                    <Navbar.Collapse
+                        id="main-nav"
+                        className="justify-content-end"
+                    >
+                        <Nav>
+                            {links !== null && renderLink(links)}
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+
         </>
     )
 };
