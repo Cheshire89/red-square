@@ -48,7 +48,7 @@ export default function Header() {
         <Navbar className="bg-body-tertiary">
             <Container fluid>
                 <Navbar.Brand>
-                    <img src={logo} alt={ui.name} width="150px" />
+                    <img className="img-fluid" src={logo} alt={ui.name} style={{ maxHeight: '70px' }} />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="main-nav" />
                 <Navbar.Collapse

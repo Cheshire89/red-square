@@ -11,16 +11,16 @@ export default function Footer() {
         <Container>
             <Row>
                 <Col md={4}>
-                    <img src={RedSquareLogoSquare} alt={ui.name} />
+                    <img className="img-fluid" src={RedSquareLogoSquare} alt={ui.name} />
                 </Col>
                 <Col md={4}>
-                    <ul>
+                    <ul className="list-unstyled">
                         {address.map(line => <li key={line}>{line}</li>)}
                     </ul>
                     <SocialLinks />
                 </Col>
                 <Col md={4}>
-                    <ul>
+                    <ul className="list-unstyled">
                         <li>Kitchen Hours</li>
                         <li>{hours.kitchen}</li>
                         <li>Bar Hours</li>
