@@ -1,7 +1,13 @@
-export default function PageBanner() {
+import { Container, Row, Col } from 'react-bootstrap';
+export default function PageBanner({ title }: { title: string }) {
     return (
-        <section>
-            <h1>Page Banner</h1>
-        </section>
+        <Container fluid>
+            <Row>
+                <Col>
+                    <span className="overlay"></span>
+                    <h1 className="text-uppercase header text-center">{title}</h1>
+                </Col>
+            </Row>
+        </Container>
     )
 };
