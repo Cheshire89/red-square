@@ -1,7 +1,5 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { SocialIcon } from 'react-social-icons'
-import { List, ListItem } from "@mui/material";
 import { Link } from "react-router-dom";
 
 

@@ -1,4 +1,10 @@
 import { Container, Grid } from "@mui/material";
+import flowerImg from '../assets/flowers-1.jpg';
+import vodkaImg from '../assets/vodka.jpg';
+import lemonTartImg from '../assets/lemontart.jpg';
+import patioImg from '../assets/patio.jpg';
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 const events = [
     'Birthday Parties',
@@ -13,15 +19,25 @@ const events = [
 ];
 
 export default function CallOut() {
+    const { name } = useSelector((state: RootState) => state.ui);
     return (
         <Container>
             <Grid container={true} spacing={2}>
                 <Grid item xs={6} sm={6} md={3}>
-                    <img src="" alt="" />
+                    <img src={flowerImg} alt="Flower" />
+                </Grid>
+                <Grid item xs={6} sm={6} md={3}>
+                    <img src={vodkaImg} alt="Vodka" />
+                </Grid>
+                <Grid item xs={6} sm={6} md={3}>
+                    <img src={lemonTartImg} alt="Lemon Tart" />
+                </Grid>
+                <Grid item xs={6} sm={6} md={3}>
+                    <img src={patioImg} alt={`${name} patio`} />
                 </Grid>
             </Grid>
             <p>
-                {events.map(e => <span key={e}>Image</span>)}
+                {events.map(event => <span key={event}>{event}</span>)}
             </p>
         </Container>
     )
