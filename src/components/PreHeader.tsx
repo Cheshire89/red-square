@@ -9,8 +9,8 @@ export default function PreHeader() {
         <Navbar className="bg-body-secondary">
             <Nav className="ms-auto">
                 <Navbar.Text>Make Reservations Online or Call</Navbar.Text>
-                <Nav.Link href={'tel:' + ui.phone}>{ui.phone}</Nav.Link>
-                <Nav.Link href={'mailto:' + ui.email}>{ui.email}</Nav.Link>
+                <Nav.Link href={'tel:' + ui.phone}><i className="fa-solid fa-phone"></i>{ui.phone}</Nav.Link>
+                <Nav.Link href={'mailto:' + ui.email}><i className="fa-solid fa-envelope"></i>{ui.email}</Nav.Link>
             </Nav>
         </Navbar>
     )
