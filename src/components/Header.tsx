@@ -10,7 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/RedSquareLogo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from "react-router-dom";
-import { NavigationLink } from '../models.ts/NavigationLink.model';
+import { NavigationLink } from '../models/NavigationLink.model';
 
 export default function Header() {
     const ui = useSelector((state: RootState) => state.ui);

@@ -1,4 +1,4 @@
-import { VodkaItem } from "../models.ts/MenuItem.model";
+import { VodkaItem } from "@models/MenuItem.model";
 
 export default function VodkaMenuItem({ item }: { item: VodkaItem }) {
     const { vodkaTitle, priceShot, priceCarafe } = item;
