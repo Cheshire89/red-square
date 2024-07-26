@@ -10,12 +10,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo from '../assets/RedSquareLogo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from "react-router-dom";
-
-interface NavigationLink {
-    label: string;
-    link: string;
-    children?: NavigationLink[]
-}
+import { NavigationLink } from '../models.ts/NavigationLink.model';
 
 export default function Header() {
     const ui = useSelector((state: RootState) => state.ui);
@@ -33,7 +28,7 @@ export default function Header() {
                     <Nav.Link>{label}</Nav.Link>
                 </LinkContainer>
                 :
-                <NavDropdown title={label} id={label.toLowerCase() + '-id'}>
+                <NavDropdown key={link + index} title={label} id={label.toLowerCase() + '-id'}>
                     {children.map(({ link, label }, index) => (
                         <LinkContainer key={link + index} to={link}>
                             <NavDropdown.Item>{label}</NavDropdown.Item>
@@ -59,7 +54,7 @@ export default function Header() {
                     className="justify-content-end"
                 >
                     <Nav>
-                        {links !== null && renderLink(links)}
+                        {(links !== null && links.length) && renderLink(links)}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
