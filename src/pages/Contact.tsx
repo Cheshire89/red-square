@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import AddressText from "../components/AddressText";
 import SocialLinks from "../components/SocialLinks";
-import PageBanner from "../components/PageBanner";
+import PageBanner from "../components/PageBanner/PageBanner";
 
 export default function Contact() {
     return (

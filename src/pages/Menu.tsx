@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom"
-import PageBanner from "../components/PageBanner";
+import PageBanner from "../components/PageBanner/PageBanner";
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
-import { MenuItem, VodkaItem, WineItem } from "../models.ts/MenuItem.model";
-import VodkaMenuItem from "../components/VodkaMenuItem";
-import FoodMenuItem from "../components/FoodMenuItem";
-import WineMenuItem from "../components/WineMenuItem";
+import { MenuItem, VodkaItem, WineItem } from "@models/MenuItem.model";
+
+import VodkaMenuItem from '../components/MenuItems/VodkaMenuItem';
+import FoodMenuItem from '../components/MenuItems/FoodMenuItem';
+import WineMenuItem from '../components/MenuItems/WineMenuItem';
 
 export default function Menu() {
     const [menuData, setMenuData] = useState<any | null>(null);
@@ -25,7 +26,7 @@ export default function Menu() {
                     }
                 })
         }
-    }, [section])
+    }, [section, menuData])
 
     const renderDinner = (sectionTitle: string, data: any) => (
         <>

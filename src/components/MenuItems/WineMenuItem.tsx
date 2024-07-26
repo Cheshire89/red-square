@@ -1,4 +1,4 @@
-import { WineItem } from "../models.ts/MenuItem.model";
+import { WineItem } from "@models/MenuItem.model";
 
 export default function WineMenuItem({ item }: { item: WineItem }) {
     const { wineTitle, wineCountry, winePrice } = item;

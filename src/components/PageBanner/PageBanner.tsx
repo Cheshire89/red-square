@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
+
 export default function PageBanner({ title }: { title: string }) {
     return (
         <Container fluid>
