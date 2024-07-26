@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import PageBanner from "../components/PageBanner";
 import { useEffect, useState } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import { MenuItem, VodkaItem, WineItem } from "../models.ts/MenuItem.model";
 import VodkaMenuItem from "../components/VodkaMenuItem";
@@ -29,7 +29,7 @@ export default function Menu() {
 
     const renderDinner = (sectionTitle: string, data: any) => (
         <>
-            <h3>{sectionTitle}</h3>
+            <h3 className="text-uppercase">{sectionTitle}</h3>
             <ul className="list-unstyled">
                 {Array.isArray(data[sectionTitle]) && data[sectionTitle].map((item: MenuItem, index: number) => {
                     const key = `${sectionTitle}-${index + 1}`
@@ -41,7 +41,7 @@ export default function Menu() {
 
     const renderVodka = (sectionTitle: string, data: any) => (
         <>
-            <h3>{sectionTitle}</h3>
+            <h3 className="text-uppercase">{sectionTitle}</h3>
             <ul className="list-unstyled">
                 {Array.isArray(data[sectionTitle]) && data[sectionTitle].map((item: VodkaItem, index: number) => {
                     const key = `${sectionTitle}-${index + 1}`;
@@ -54,7 +54,7 @@ export default function Menu() {
     const renderSipsAndSnacks = (sectionTitle: string, data: any) => {
         if (sectionTitle !== 'wines') {
             return <>
-                <h3>{sectionTitle}</h3>
+                <h3 className="text-uppercase">{sectionTitle}</h3>
                 <ul className="list-unstyled">
                     {
                         Array.isArray(data[sectionTitle]) && data[sectionTitle].map((item: MenuItem, index: number) => {
@@ -71,7 +71,7 @@ export default function Menu() {
 
     const renderWines = (sectionTitle: string, data: any) => (
         <>
-            <h3>{sectionTitle}</h3>
+            <h3 className="text-uppercase">{sectionTitle}</h3>
             {
                 Object.keys(data).map((section, index) => {
                     return <ul key={section + index} className="list-unstyled">
