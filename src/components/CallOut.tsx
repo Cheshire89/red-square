@@ -37,7 +37,7 @@ export default function CallOut() {
                 </Grid>
             </Grid>
             <p>
-                {events.map(event => <span key={event}>{event}</span>)}
+                {events.map((event, index) => <span key={event + index}>{event}</span>)}
             </p>
         </Container>
     )
