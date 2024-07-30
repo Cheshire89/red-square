@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
 import { Link } from "react-router-dom";
+// import styles from './SocialLinks.module.scss';
 
 
 export default function SocialLinks() {

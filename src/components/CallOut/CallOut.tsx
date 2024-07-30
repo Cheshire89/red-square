@@ -1,10 +1,11 @@
 import { Container, Grid } from "@mui/material";
-import flowerImg from '../assets/flowers-1.jpg';
-import vodkaImg from '../assets/vodka.jpg';
-import lemonTartImg from '../assets/lemontart.jpg';
-import patioImg from '../assets/patio.jpg';
+import flowerImg from '@assets/flowers-1.jpg';
+import vodkaImg from '@assets/vodka.jpg';
+import lemonTartImg from '@assets/lemontart.jpg';
+import patioImg from '@assets/patio.jpg';
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
+// import styles from './CallOut.module.scss';
 
 const events = [
     'Birthday Parties',

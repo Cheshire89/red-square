@@ -1,9 +1,9 @@
 import Carousel from 'react-bootstrap/Carousel';
 import { Container, Row, Col } from 'react-bootstrap';
-import InfusedVodkaImg from '../assets/infused_vodkas.jpg';
-import RibsImg from '../assets/ribs.jpg';
-import VodkaPourImg from '../assets/vodkapour.jpg';
-import RestaurantImg from '../assets/restaurant.jpg';
+import InfusedVodkaImg from '@assets/infused_vodkas.jpg';
+import RibsImg from '@assets/ribs.jpg';
+import VodkaPourImg from '@assets/vodkapour.jpg';
+import RestaurantImg from '@assets/restaurant.jpg';
 
 export default function Home() {
     return (
