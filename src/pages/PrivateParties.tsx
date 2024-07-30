@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import AddressText from "../components/AddressText";
-import SocialLinks from "../components/SocialLinks";
-import CallOut from "../components/CallOut";
+import SocialLinks from "../components/SocialLinks/SocialLinks";
+import CallOut from "../components/CallOut/CallOut";
 
 export default function PrivateParties() {
     return (

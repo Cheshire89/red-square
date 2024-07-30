@@ -1,8 +1,8 @@
-@import '~bootstrap/scss/bootstrap';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
-@import '~@fortawesome/fontawesome-free/scss/regular';
+@forward '~bootstrap/scss/bootstrap';
+@forward '~@fortawesome/fontawesome-free/scss/fontawesome';
+// @forward '~@fortawesome/fontawesome-free/scss/solid';
+// @forward '~@fortawesome/fontawesome-free/scss/brands';
+// @forward '~@fortawesome/fontawesome-free/scss/regular';
 
 
 a .fa-solid {

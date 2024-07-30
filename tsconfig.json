@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "target": "es5",
     "lib": [
       "dom",
@@ -21,12 +25,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@components/*": [
-        "./src/components/*"
-      ],
       "@models/*": [
         "./src/models/*"
-      ],
+      ]
     }
   },
   "include": [

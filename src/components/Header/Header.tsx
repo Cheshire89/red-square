@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
-import { RootState } from '../store/store';
+import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo from '../assets/RedSquareLogo.jpg';
+import logo from '@assets/RedSquareLogo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from "react-router-dom";
-import { NavigationLink } from '../models/NavigationLink.model';
+import { NavigationLink } from '../../models/NavigationLink.model';
+// import styles from './Header.module.scss';
 
 export default function Header() {
     const ui = useSelector((state: RootState) => state.ui);

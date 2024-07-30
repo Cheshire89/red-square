@@ -1,6 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import AddressText from "../components/AddressText";
-import SocialLinks from "../components/SocialLinks";
+import SocialLinks from "../components/SocialLinks/SocialLinks";
 
 export default function Reservations() {
     return (
