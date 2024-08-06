@@ -1,0 +1,20 @@
+.socialLinks {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  a {
+    color: var(--theme-dark);
+    font-size: 1.2rem;
+    transition: ease-in-out 0.3s;
+    &:hover {
+      font-size: 1.5rem;
+      color: var(--theme-primary);
+    }
+  }
+
+  &--alt {
+    a:hover {
+      color: var(--theme-light);
+    }
+  }
+}

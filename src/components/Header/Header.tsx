@@ -11,6 +11,7 @@ import logo from '@assets/RedSquareLogo.jpg';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from "react-router-dom";
 import { NavigationLink } from '../../models/NavigationLink.model';
+
 // import styles from './Header.module.scss';
 
 export default function Header() {

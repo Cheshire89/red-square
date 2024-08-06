@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import AddressText from "../components/AddressText";
+import AddressText from "../components/AddressText/AddressText";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import PageBanner from "../components/PageBanner/PageBanner";
 

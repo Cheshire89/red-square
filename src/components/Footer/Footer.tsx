@@ -4,9 +4,11 @@ import SocialLinks from "../SocialLinks/SocialLinks";
 import RedSquareLogoSquare from "@assets/RedSquareLogo-square.jpg";
 import { Container, Row, Col } from 'react-bootstrap';
 import styles from './Footer.module.scss';
+import { getAddress } from "@uiStore/ui.slice";
 
 export default function Footer() {
-    const { address, hours, ...ui } = useSelector((state: RootState) => state.ui);
+    const { hours, ...ui } = useSelector((state: RootState) => state.ui);
+    const address = useSelector(getAddress);
 
     return (
         <section className={styles.footerContainer}>
@@ -16,10 +18,12 @@ export default function Footer() {
                         <img className="img-fluid" src={RedSquareLogoSquare} alt={ui.name} />
                     </Col>
                     <Col md={4}>
-                        <ul className="list-unstyled">
-                            {address.map(line => <li key={line}>{line}</li>)}
-                        </ul>
-                        <SocialLinks />
+                        <address>
+                            <ul className="list-unstyled">
+                                {address.map(line => <li key={line}>{line}</li>)}
+                            </ul>
+                        </address>
+                        <SocialLinks alt/>
                     </Col>
                     <Col md={4}>
                         <ul className="list-unstyled">
