@@ -1,10 +1,17 @@
-@forward '~bootstrap/scss/bootstrap';
-@forward '~@fortawesome/fontawesome-free/scss/fontawesome';
-// @forward '~@fortawesome/fontawesome-free/scss/solid';
-// @forward '~@fortawesome/fontawesome-free/scss/brands';
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 // @forward '~@fortawesome/fontawesome-free/scss/regular';
 
+body {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
 
 a .fa-solid {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }

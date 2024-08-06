@@ -1,11 +1,25 @@
 [
     {
         "label": "About",
-        "link": "about"
+        "link": "about",
+        "children": [
+            {
+                "label": "Us",
+                "link": "about/us"
+            },
+            {
+                "label": "Food",
+                "link": "about/our-food"
+            },
+            {
+                "label": "Bar",
+                "link": "about/our-bar"
+            }
+        ]
     },
     {
-        "label": "Food",
-        "link": "food",
+        "label": "Menu",
+        "link": "menu",
         "children": [
             {
                 "label": "Dinner",
@@ -14,13 +28,7 @@
             {
                 "label": "Dessert",
                 "link": "menu/dessert"
-            }
-        ]
-    },
-    {
-        "label": "Bar",
-        "link": "bar",
-        "children": [
+            },
             {
                 "label": "Sips+Snacks",
                 "link": "menu/sips-and-snacks"
