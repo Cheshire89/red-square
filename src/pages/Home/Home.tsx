@@ -4,24 +4,26 @@ import InfusedVodkaImg from '@assets/infused_vodkas.jpg';
 import RibsImg from '@assets/ribs.jpg';
 import VodkaPourImg from '@assets/vodkapour.jpg';
 import RestaurantImg from '@assets/restaurant.jpg';
+import styles from './Home.module.scss';
 
 export default function Home() {
     return (
         <>
-            <Carousel>
-                <Carousel.Item>
-                    <img className="img-fluid" src={RibsImg} alt="Ribs" />
+            <Carousel className={styles.carouselContainer}>
+                <Carousel.Item className={styles.carouselItem}>
+                    <img src={RibsImg} alt="Ribs" />
                 </Carousel.Item>
-                <Carousel.Item>
-                    <img className="img-fluid" src={InfusedVodkaImg} alt="Infused Vodka" />
+                <Carousel.Item className={styles.carouselItem}>
+                    <img src={InfusedVodkaImg} alt="Infused Vodka" />
                 </Carousel.Item>
-                <Carousel.Item>
-                    <img className="img-fluid" src={RestaurantImg} alt="Restaurant Dining Area" />
+                <Carousel.Item className={styles.carouselItem}>
+                    <img src={RestaurantImg} alt="Restaurant Dining Area" />
                 </Carousel.Item>
-                <Carousel.Item>
-                    <img className="img-fluid" src={VodkaPourImg} alt="Vodka Pour" />
+                <Carousel.Item className={styles.carouselItem}>
+                    <img src={VodkaPourImg} alt="Vodka Pour" />
                 </Carousel.Item>
             </Carousel>
+
             <Container>
                 <Row>
                     <Col md={6}>
