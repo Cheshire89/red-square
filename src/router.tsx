@@ -1,4 +1,4 @@
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Reservations from './pages/Reservations';
 import Contact from './pages/Contact';
 import PrivateParties from './pages/PrivateParties';
