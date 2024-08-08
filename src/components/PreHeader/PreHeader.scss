@@ -1,0 +1,11 @@
+.pageHeader {
+  background-color: var(--theme-dark);
+
+  .navbar-text,
+  .nav-link {
+    color: var(--theme-light);
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 0.9rem;
+  }
+}
