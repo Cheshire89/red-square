@@ -25,7 +25,7 @@ export default function Reservations() {
           <Col
             md={6}
             id="otWidget"
-            className="d-flex justify-content-center align-items-center"
+            className="d-flex justify-content-center align-items-top"
           ></Col>
           <Col md={6}>
             <h3 className="header text-uppercase">Join Us</h3>
