@@ -1,0 +1,34 @@
+.app-header {
+  background-color: var(--theme-light);
+  border-bottom: 1px solid var(--theme-lightBorder);
+  padding: 0px;
+
+  a {
+    color: var(--theme-dark);
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 2rem 0.6rem;
+    text-decoration: none;
+    transition: what 0.4s ease-in-out;
+    text-transform: uppercase;
+    opacity: 0.8;
+    &.active,
+    &:hover {
+      color: var(--theme-primary) !important;
+      opacity: 1;
+      background-color: transparent;
+    }
+  }
+
+  .dropdown-menu {
+    a {
+      padding: 5px 0.6rem;
+    }
+  }
+
+  .navbar-brand {
+    a {
+      opacity: 1;
+    }
+  }
+}

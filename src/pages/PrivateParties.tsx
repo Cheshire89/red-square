@@ -11,7 +11,11 @@ export default function PrivateParties() {
         <Container>
           <Row>
             <Col md={6}>
-              <img className="img-fluid" src="" alt="Dummy" />
+              <img
+                className="img-fluid"
+                src="/privatedining-1.jpg"
+                alt="Dining"
+              />
             </Col>
             <Col md={6}>
               <h3 className="header text-uppercase">BOOK WITH US</h3>
