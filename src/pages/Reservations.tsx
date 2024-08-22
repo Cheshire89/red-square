@@ -2,15 +2,31 @@ import { Container, Row, Col } from "react-bootstrap";
 import AddressText from "../components/AddressText/AddressText";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
+import { useEffect } from "react";
 
 export default function Reservations() {
+  useEffect(() => {
+    if (window && document) {
+      const container = document.getElementById("otWidget");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src =
+        "//www.opentable.com/widget/reservation/loader?rid=3851&domain=com&type=standard&theme=standard&lang=en-US&overlay=false&iframe=true";
+
+      if (container) {
+        container.appendChild(script);
+      }
+    }
+  }, []);
   return (
     <ContentBlock background="grey">
       <Container>
         <Row>
-          <Col md={6}>
-            <img className="img-fluid" src="" alt="Dummy" />
-          </Col>
+          <Col
+            md={6}
+            id="otWidget"
+            className="d-flex justify-content-center align-items-center"
+          ></Col>
           <Col md={6}>
             <h3 className="header text-uppercase">Join Us</h3>
             <h1 className="header text-uppercase">We Encourage Reservations</h1>

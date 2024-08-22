@@ -1,8 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+.navbar {
+  min-height: 0px;
+  margin-bottom: 0px;
+}
+
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 // @forward '~@fortawesome/fontawesome-free/scss/regular';
+
+$fontThick: "Source Sans Pro", Helvetica, Arial, Lucida, sans-serif;
+$fontText: "Open Sans", Helvetica, Arial, sans-serif;
 
 body {
   font-size: 16px;
