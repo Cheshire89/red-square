@@ -1,25 +1,23 @@
 {
   "profile": {
-    "redSquare": {
-      "appName": "red-square",
-      "name": "Red Square",
-      "phone": "3035958600",
-      "email": "info@redsquare.com",
-      "address": "WriterSquare\r\n1512 Larimer St R38",
-      "city": "Denver",
-      "state": "CO",
-      "zip": "80202",
-      "hours": {
-        "kitchen": "Tues-Thurs 5:00pm - 9:00pm Fri-Sat 5:00pm - 10:00pm",
-        "bar": "Tues-Thurs 5:00pm - 11:30pm Fri-Sat 5:00pm -01:30am"
-      },
-      "social": {
-        "instagram": "https://www.instagram.com/redsquarebistro/",
-        "twitter": "https://twitter.com/redsquarebistro",
-        "facebook": "https://www.facebook.com/redsquareeurobistro/?fref=ts&ref=br_tf",
-        "yelp": "https://www.yelp.com/biz/red-square-euro-bistro-denver-3",
-        "opentable": "https://www.opentable.com/r/red-square-euro-bistro-denver"
-      }
+    "appName": "red-square",
+    "name": "Red Square",
+    "phone": "3035958600",
+    "email": "info@redsquare.com",
+    "address": "WriterSquare\r\n1512 Larimer St R38",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "80202",
+    "hours": {
+      "kitchen": "Tues-Thurs 5:00pm - 9:00pm Fri-Sat 5:00pm - 10:00pm",
+      "bar": "Tues-Thurs 5:00pm - 11:30pm Fri-Sat 5:00pm -01:30am"
+    },
+    "social": {
+      "instagram": "https://www.instagram.com/redsquarebistro/",
+      "twitter": "https://twitter.com/redsquarebistro",
+      "facebook": "https://www.facebook.com/redsquareeurobistro/?fref=ts&ref=br_tf",
+      "yelp": "https://www.yelp.com/biz/red-square-euro-bistro-denver-3",
+      "opentable": "https://www.opentable.com/r/red-square-euro-bistro-denver"
     }
   }
 }
