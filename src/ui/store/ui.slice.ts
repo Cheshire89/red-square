@@ -3,7 +3,6 @@ import { UiState } from "./ui.model";
 import { Util } from "../../services/Util.service";
 
 const initialState: UiState = {
-  appName: "",
   name: "",
   phone: "",
   email: "",

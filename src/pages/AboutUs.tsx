@@ -1,9 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
 
 export default function AboutUs() {
-  const { appName } = useSelector((state: RootState) => state.ui);
+  const appName = process.env.REACT_APP_APPLICATION_NAME;
   return (
     <>
       <Container>

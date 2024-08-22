@@ -8,7 +8,6 @@ export interface UiTheme {
 }
 
 export interface UiState {
-  appName: string;
   name: string;
   phone: string;
   email: string;
@@ -23,4 +22,5 @@ export interface UiState {
   social: {
     [key: string]: string;
   };
+  theme?: UiTheme;
 }
