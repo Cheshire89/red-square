@@ -15,11 +15,7 @@ export default function Footer() {
       <Container>
         <Row>
           <Col md={4}>
-            <img
-              className="img-fluid"
-              src={RedSquareLogoSquare}
-              alt={ui.name}
-            />
+            <img src={RedSquareLogoSquare} alt={ui.name} />
           </Col>
           <Col md={4}>
             <ul className="list-unstyled">
