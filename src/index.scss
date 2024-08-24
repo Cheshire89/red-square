@@ -35,6 +35,12 @@ a .fa-solid {
   width: 100%;
 }
 
+.header-narrow,
+.header-spaced {
+  text-transform: uppercase;
+  color: #4b4b4b;
+}
+
 .header-narrow {
   font-size: 1.63;
   font-family: "Source Sans Pro", Helvetica, Arial, Lucida, sans-serif;
@@ -52,11 +58,6 @@ a .fa-solid {
 }
 
 .page-text {
-  h1,
-  h3 {
-    color: #4b4b4b;
-    text-transform: uppercase;
-  }
   h3 {
     @extend .header-spaced;
   }

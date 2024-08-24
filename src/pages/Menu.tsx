@@ -8,6 +8,8 @@ import VodkaMenuItem from "../components/MenuItems/VodkaMenuItem";
 import FoodMenuItem from "../components/MenuItems/FoodMenuItem";
 import WineMenuItem from "../components/MenuItems/WineMenuItem";
 import apiService from "../services/Api.service";
+import { ContentBlock } from "../components/ContentBlock/ContentBlock";
+import "./Menu.scss";
 
 export default function Menu() {
   const [menuData, setMenuData] = useState<any | null>(null);
@@ -29,7 +31,7 @@ export default function Menu() {
 
   const renderDinner = (sectionTitle: string, data: any) => (
     <>
-      <h3 className="text-uppercase">{sectionTitle}</h3>
+      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
       <ul className="list-unstyled">
         {Array.isArray(data[sectionTitle]) &&
           data[sectionTitle].map((item: MenuItem, index: number) => {
@@ -42,7 +44,7 @@ export default function Menu() {
 
   const renderVodka = (sectionTitle: string, data: any) => (
     <>
-      <h3 className="text-uppercase">{sectionTitle}</h3>
+      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
       <ul className="list-unstyled">
         {Array.isArray(data[sectionTitle]) &&
           data[sectionTitle].map((item: VodkaItem, index: number) => {
@@ -57,7 +59,7 @@ export default function Menu() {
     if (sectionTitle !== "wines") {
       return (
         <>
-          <h3 className="text-uppercase">{sectionTitle}</h3>
+          <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
           <ul className="list-unstyled">
             {Array.isArray(data[sectionTitle]) &&
               data[sectionTitle].map((item: MenuItem, index: number) => {
@@ -117,17 +119,24 @@ export default function Menu() {
     <>
       <PageBanner title={section || ""} />
       {data !== null && (
-        <Container>
-          <Row>
-            {section !== "dessert"
-              ? Object.keys(data).map((sectionTitle, index) => (
-                  <Col key={sectionTitle + index} xs={12} sm={10}>
-                    {section && renderSection(sectionTitle, section, data)}
-                  </Col>
-                ))
-              : renderDessert(data)}
-          </Row>
-        </Container>
+        <ContentBlock>
+          <Container>
+            <Row>
+              {section !== "dessert"
+                ? Object.keys(data).map((sectionTitle, index) => (
+                    <Col
+                      className="mx-auto mt-5"
+                      key={sectionTitle + index}
+                      xs={12}
+                      sm={10}
+                    >
+                      {section && renderSection(sectionTitle, section, data)}
+                    </Col>
+                  ))
+                : renderDessert(data)}
+            </Row>
+          </Container>
+        </ContentBlock>
       )}
     </>
   );
