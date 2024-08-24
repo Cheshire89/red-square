@@ -27,9 +27,9 @@ export default function Reservations() {
             id="otWidget"
             className="d-flex justify-content-center align-items-top"
           ></Col>
-          <Col md={6}>
-            <h3 className="header text-uppercase">Join Us</h3>
-            <h1 className="header text-uppercase">We Encourage Reservations</h1>
+          <Col md={6} className="page-text">
+            <h3>Join Us</h3>
+            <h1>We Encourage Reservations</h1>
             <p>
               Whether you are celebrating a special occasion or just a night out
               on the town, please join us in our dining room. If you have any

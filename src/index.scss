@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
 .navbar {
   min-height: 0px;
   margin-bottom: 0px;
@@ -28,4 +29,45 @@ a .fa-solid {
 
 .bg-grey {
   background-color: #eaeaea;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+.header-narrow {
+  font-size: 1.63;
+  font-family: "Source Sans Pro", Helvetica, Arial, Lucida, sans-serif;
+  font-weight: 700;
+  margin-top: 0px;
+}
+
+.header-spaced {
+  color: #4b4b4b;
+  margin-bottom: 0.63rem;
+  font-size: 1rem;
+  letter-spacing: 0.44rem;
+  font-weight: bold;
+  font-size: 1.19rem;
+}
+
+.page-text {
+  h1,
+  h3 {
+    color: #4b4b4b;
+    text-transform: uppercase;
+  }
+  h3 {
+    @extend .header-spaced;
+  }
+  h1 {
+    @extend .header-narrow;
+  }
+  p {
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 0.88;
+    font-weight: 500;
+    line-height: 1.5rem;
+    word-break: break-word;
+  }
 }

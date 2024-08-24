@@ -13,9 +13,9 @@ export default function AddressText() {
   return (
     <p className={styles.addressText}>
       {address.map((line, index) => (
-        <>{line + (isLast(index) ? "" : " | ")}</>
-      ))}
-      Phone: <a href={"tel:" + ui.phone}>{phoneFormatted}</a> | Email:{" "}
+        <span key={line}>{line + (isLast(index) ? "" : " | ")}</span>
+      ))}{" "}
+      | Phone: <a href={"tel:" + ui.phone}>{phoneFormatted}</a> | Email:
       <a href={"mailto:" + ui.email}>{ui.email}</a>
     </p>
   );

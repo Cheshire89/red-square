@@ -17,9 +17,9 @@ export default function PrivateParties() {
                 alt="Dining"
               />
             </Col>
-            <Col md={6}>
-              <h3 className="header text-uppercase">BOOK WITH US</h3>
-              <h1 className="header text-uppercase">Custom Private Parties</h1>
+            <Col md={6} className="page-text">
+              <h3>BOOK WITH US</h3>
+              <h1>Custom Private Parties</h1>
               <p>
                 Our elegant semi-private dining room can accommodate 12-50
                 people for any special occasion. Our executive chef and private
