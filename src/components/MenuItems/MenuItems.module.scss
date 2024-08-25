@@ -1,24 +1,48 @@
-.menu {
-}
-.foodItem {
-  border: 0px;
-  padding: 10px 0px;
-
-  strong {
-    font-size: 14px;
-  }
-
+%menuItem {
   p {
     border-bottom: 1px dotted #4b4b4b;
     display: flex;
     justify-content: space-between;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     font-size: 13px;
-    span {
+    span,
+    i {
       position: relative;
       background: #fff;
       padding-bottom: 2px;
       bottom: -3px;
     }
+  }
+}
+
+.foodItem {
+  padding: 10px 0px;
+  strong {
+    font-size: 14px;
+  }
+  @extend %menuItem;
+}
+
+.vodkaItem {
+  @extend %menuItem;
+}
+
+.vodkaItemPrice {
+  span:first-child {
+    display: inline-block;
+    transform: translateX(-10vw);
+    @media screen and (max-width: 990px) {
+      transform: translateX(-20vw);
+    }
+    @media screen and (max-width: 575px) {
+      transform: translateX(-30vw);
+    }
+  }
+}
+
+.wineItem {
+  @extend %menuItem;
+  i {
+    margin-left: 5px;
   }
 }

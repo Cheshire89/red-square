@@ -10,6 +10,7 @@ import WineMenuItem from "../components/MenuItems/WineMenuItem";
 import apiService from "../services/Api.service";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import "./Menu.scss";
+import VodkaBarHeader from "../components/MenuItems/VodkaBarHeader";
 
 export default function Menu() {
   const [menuData, setMenuData] = useState<any | null>(null);
@@ -45,7 +46,7 @@ export default function Menu() {
   const renderVodka = (sectionTitle: string, data: any) => (
     <>
       <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
-      <ul className="list-unstyled">
+      <ul className="list-unstyled menu-list">
         {Array.isArray(data[sectionTitle]) &&
           data[sectionTitle].map((item: VodkaItem, index: number) => {
             const key = `${sectionTitle}-${index + 1}`;
@@ -76,11 +77,11 @@ export default function Menu() {
 
   const renderWines = (sectionTitle: string, data: any) => (
     <>
-      <h3 className="text-uppercase">{sectionTitle}</h3>
+      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
       {Object.keys(data).map((section, index) => {
         return (
           <ul key={section + index} className="list-unstyled">
-            <li>
+            <li className="foodItem">
               <strong>{section}</strong>
             </li>
             {Array.isArray(data[section]) &&
@@ -115,20 +116,27 @@ export default function Menu() {
     }
   };
 
+  const isDrinks = (sectionTitle: string): boolean => {
+    return sectionTitle === "wines" || sectionTitle === "cocktails";
+  };
+
   return (
     <>
       <PageBanner title={section || ""} />
       {data !== null && (
         <ContentBlock>
           <Container>
+            {section === "vodka-bar" && <VodkaBarHeader />}
             <Row>
               {section !== "dessert"
                 ? Object.keys(data).map((sectionTitle, index) => (
                     <Col
-                      className="mx-auto mt-5"
+                      className="mt-5"
                       key={sectionTitle + index}
                       xs={12}
-                      sm={10}
+                      sm={{
+                        span: isDrinks(sectionTitle) ? 6 : 12,
+                      }}
                     >
                       {section && renderSection(sectionTitle, section, data)}
                     </Col>

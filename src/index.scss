@@ -72,3 +72,20 @@ a .fa-solid {
     word-break: break-word;
   }
 }
+
+.menu-list {
+  padding-top: 20px;
+  column-count: 2;
+  column-gap: 30px;
+  @media screen and (max-width: 990px) {
+    column-count: 1;
+  }
+}
+
+.foodItem {
+  padding: 10px 0px;
+  strong {
+    font-size: 14px;
+    text-transform: capitalize;
+  }
+}
