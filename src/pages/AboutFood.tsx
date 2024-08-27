@@ -1,14 +1,16 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import PhoneNum from "../components/PhoneNum/PhoneNum";
+import ImageCollage from "../components/ImageCollage/ImageCollage";
 
 export default function AboutFood() {
+  const images: string[] = ["stroganoff.jpg", "litdrink.jpg", "smores.jpg"];
   return (
     <>
       <ContentBlock background="grey">
         <Container>
           <Row>
-            <Col md={6} className="page-text">
+            <Col md={5} className="page-text">
               <h3>Our Food</h3>
               <p>
                 Our menu changes seasonally, aligning with local and fresh
@@ -31,8 +33,13 @@ export default function AboutFood() {
                 call ahead at <PhoneNum />.
               </p>
             </Col>
-            <Col md={6}>
-              <img className="img-fluid" src="" alt="Dummy" />
+            <Col
+              md={{
+                span: 6,
+                offset: 1,
+              }}
+            >
+              <ImageCollage images={images} />
             </Col>
           </Row>
         </Container>

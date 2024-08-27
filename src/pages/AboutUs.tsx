@@ -23,12 +23,8 @@ export default function AboutUs() {
                 part of the family.
               </p>
             </Col>
-            <Col md={6}>
-              <img
-                className="img-fluid"
-                src="patio-1.jpg"
-                alt={`${appName} Patio`}
-              />
+            <Col md={6} className="d-flex justify-content-center">
+              <div className="placeholde-it" data-text="Red Square"></div>
             </Col>
           </Row>
         </Container>

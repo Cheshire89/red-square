@@ -54,11 +54,14 @@ export default function Home() {
       <ContentBlock background="grey">
         <Container>
           <Row>
-            <Col md={6}>
+            <Col md={6} className="d-flex justify-content-center">
               <img
                 className="img-fluid d-sm-none d-md-block"
                 src="/pickle_shot.jpg"
                 alt="Pickle shot"
+                style={{
+                  maxWidth: "450px",
+                }}
               />
             </Col>
             <Col md={6}>
