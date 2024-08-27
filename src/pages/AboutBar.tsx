@@ -1,13 +1,15 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
+import ImageCollage from "../components/ImageCollage/ImageCollage";
 
 export default function AboutBar() {
+  const images: string[] = ["perogi.jpg", "carafe.jpg", "pickle_shot.jpg"];
   return (
     <>
       <ContentBlock background="grey">
         <Container>
           <Row>
-            <Col md={6} className="page-text">
+            <Col md={5} className="page-text">
               <h3>Our Bar</h3>
               <p>
                 Our full bar offers over 100 local and international vodkas, and
@@ -30,8 +32,13 @@ export default function AboutBar() {
                 extensive wine list!
               </p>
             </Col>
-            <Col md={6}>
-              <img className="img-fluid" src="" alt="Dummy" />
+            <Col
+              md={{
+                span: 6,
+                offset: 1,
+              }}
+            >
+              <ImageCollage images={images} />
             </Col>
           </Row>
         </Container>

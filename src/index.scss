@@ -89,3 +89,24 @@ a .fa-solid {
     text-transform: capitalize;
   }
 }
+
+.placeholde-it {
+  display: flex;
+  width: 450px;
+  height: 450px;
+  background-color: var(--theme-primary);
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    content: attr(data-text);
+    color: #fff;
+    display: flex;
+    font-weight: 700;
+    font-family: "Source Sans Pro", Helvetica, Arial, Lucida, sans-serif;
+    font-size: 4rem;
+    letter-spacing: -3px;
+    text-transform: uppercase;
+  }
+}
