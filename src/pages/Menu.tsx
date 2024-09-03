@@ -122,7 +122,7 @@ export default function Menu() {
 
   return (
     <>
-      <PageBanner title={section || ""} />
+      <PageBanner title={section || ""} background={`${section}.jpg`} />
       {data !== null && (
         <ContentBlock>
           <Container>
