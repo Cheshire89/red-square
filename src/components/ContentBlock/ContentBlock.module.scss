@@ -4,3 +4,9 @@
   padding-bottom: 4.25rem;
   min-height: calc(100vh - 280px - 95px - 35px);
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

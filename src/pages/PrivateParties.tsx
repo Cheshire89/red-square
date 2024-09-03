@@ -40,7 +40,7 @@ export default function PrivateParties() {
           </Row>
         </Container>
       </ContentBlock>
-      <ContentBlock>
+      <ContentBlock center>
         <CallOut />
       </ContentBlock>
     </>

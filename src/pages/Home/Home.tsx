@@ -6,7 +6,8 @@ import VodkaPourImg from "@assets/vodkapour.jpg";
 import RestaurantImg from "@assets/restaurant.jpg";
 import "./Home.scss";
 import { ContentBlock } from "../../components/ContentBlock/ContentBlock";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { debounce } from "lodash";
 
 const widgetUrl = (
   theme: "wide" | "standard" = "wide",
@@ -15,25 +16,47 @@ const widgetUrl = (
   return `//www.opentable.com/widget/reservation/loader?rid=${rid}&domain=com&type=standard&theme=${theme}&lang=en-US&overlay=false&iframe=true`;
 };
 
-let widgetContainerDesktop: HTMLElement | null = null;
-let widgetContainerMobile: HTMLElement | null = null;
+let widgetContainer: HTMLElement | null = null;
 
 export default function Home() {
+  const [widgetHeight, setWidgetHeight] = useState<string>("20px");
+
   useEffect(() => {
     if (window && document) {
-      widgetContainerDesktop = document.getElementById("otWidgetDesktop");
-      widgetContainerMobile = document.getElementById("otWidgetMobile");
-      widgetContainerDesktop?.appendChild(createScript(widgetUrl("wide")));
-      widgetContainerMobile?.appendChild(createScript(widgetUrl("standard")));
+      widgetContainer = document.getElementById("otWidget");
+      appendWidget();
     }
+    window.addEventListener("resize", appendWidget);
+    return () => {
+      window.removeEventListener("resize", appendWidget);
+    };
   }, []);
 
-  const createScript = (src: string): HTMLScriptElement => {
+  function createScript(src: string): HTMLScriptElement {
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src = src;
     return script;
-  };
+  }
+
+  const appendWidget = debounce(() => {
+    let winWidth = window.innerWidth;
+    let script;
+    let url;
+
+    if (widgetContainer !== null) {
+      clearWidget();
+      url = winWidth <= 850 ? widgetUrl("standard") : widgetUrl("wide");
+      script = createScript(url);
+      widgetContainer.append(script);
+    }
+  }, 1000);
+
+  function clearWidget() {
+    if (widgetContainer !== null && widgetContainer.children.length) {
+      widgetContainer.innerHTML = "";
+    }
+  }
 
   return (
     <>
@@ -80,16 +103,14 @@ export default function Home() {
           </Row>
         </Container>
       </ContentBlock>
-      <ContentBlock>
+      <ContentBlock height="auto">
         <Container>
           <Row>
             <Col
               xs={12}
+              id="otWidget"
               className="d-flex justify-content-center align-items-center"
-            >
-              <div id="otWidgetDesktop"></div>
-              <div id="otWidgetMobile"></div>
-            </Col>
+            ></Col>
           </Row>
         </Container>
       </ContentBlock>
