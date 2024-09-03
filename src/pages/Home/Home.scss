@@ -7,25 +7,3 @@
     transform: translateY(-13%);
   }
 }
-
-#otWidget {
-  iframe {
-    max-height: 170px;
-  }
-}
-
-#otWidgetDesktop,
-#otWidgetMobile {
-  display: none;
-}
-
-@media screen and (min-width: 768px) {
-  #otWidgetDesktop {
-    display: block;
-  }
-}
-@media screen and (max-width: 768px) {
-  #otWidgetMobile {
-    display: block;
-  }
-}

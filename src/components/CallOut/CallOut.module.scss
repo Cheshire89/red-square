@@ -1,0 +1,23 @@
+.callout {
+}
+
+.calloutText {
+  text-align: center;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  letter-spacing: 7px;
+  font-weight: 700;
+  padding: 4.188rem 0px 2.125rem;
+  text-transform: uppercase;
+  span {
+    &:not(:last-child) {
+      &:after {
+        content: "\2022";
+        color: var(--theme-primary);
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
