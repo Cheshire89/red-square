@@ -7,7 +7,7 @@ import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 export default function Contact() {
   return (
     <>
-      <PageBanner title="Contact Us" />
+      <PageBanner title="Contact Us" background="contact.jpg" />
       <ContentBlock>
         <Container>
           <Row>
