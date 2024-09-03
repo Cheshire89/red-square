@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
+import _ from "lodash";
 
 export default function AboutUs() {
   const appName = process.env.REACT_APP_APPLICATION_NAME;
@@ -23,8 +24,11 @@ export default function AboutUs() {
                 part of the family.
               </p>
             </Col>
-            <Col md={6} className="d-flex justify-content-center">
-              <div className="placeholde-it" data-text="Red Square"></div>
+            <Col md={6} className="d-flex justify-content-end">
+              <div
+                className="placeholde-it"
+                data-text={`${_.startCase(appName)}`}
+              ></div>
             </Col>
           </Row>
         </Container>
