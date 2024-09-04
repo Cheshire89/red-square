@@ -11,6 +11,9 @@
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: 0.9rem;
+    &:active {
+      color: var(--theme-light);
+    }
   }
 
   @media screen and (max-width: 550px) {

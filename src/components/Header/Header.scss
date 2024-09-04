@@ -18,11 +18,24 @@
       opacity: 1;
       background-color: transparent;
     }
+
+    @media screen and (max-width: 990px) {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   }
 
   .dropdown-menu {
+    @media screen and (max-width: 990px) {
+      padding: 0px;
+      border-color: transparent;
+    }
     a {
       padding: 5px 0.6rem;
+
+      @media screen and (max-width: 990px) {
+        padding-left: 2rem;
+      }
     }
   }
 

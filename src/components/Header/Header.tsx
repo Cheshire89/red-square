@@ -46,7 +46,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className="app-header">
+    <Navbar expand="lg" sticky="top" className="app-header">
       <Container fluid>
         <Navbar.Brand>
           <Link to={"/"}>

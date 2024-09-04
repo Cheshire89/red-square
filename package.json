@@ -35,7 +35,9 @@
     "yarn": "^1.22.22"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "concurrently \"npm run start.ui\" \"npm run start.server\"",
+    "start.ui": "craco start",
+    "start.server": "npx json-server ./db.json -p 4200",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"
