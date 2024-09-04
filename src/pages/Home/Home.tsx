@@ -6,7 +6,7 @@ import VodkaPourImg from "@assets/vodkapour.jpg";
 import RestaurantImg from "@assets/restaurant.jpg";
 import "./Home.scss";
 import { ContentBlock } from "../../components/ContentBlock/ContentBlock";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { debounce } from "lodash";
 
 const widgetUrl = (
@@ -19,26 +19,6 @@ const widgetUrl = (
 let widgetContainer: HTMLElement | null = null;
 
 export default function Home() {
-  const [widgetHeight, setWidgetHeight] = useState<string>("20px");
-
-  useEffect(() => {
-    if (window && document) {
-      widgetContainer = document.getElementById("otWidget");
-      appendWidget();
-    }
-    window.addEventListener("resize", appendWidget);
-    return () => {
-      window.removeEventListener("resize", appendWidget);
-    };
-  }, []);
-
-  function createScript(src: string): HTMLScriptElement {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = src;
-    return script;
-  }
-
   const appendWidget = debounce(() => {
     let winWidth = window.innerWidth;
     let script;
@@ -51,6 +31,24 @@ export default function Home() {
       widgetContainer.append(script);
     }
   }, 1000);
+
+  useEffect(() => {
+    if (window && document) {
+      widgetContainer = document.getElementById("otWidget");
+      appendWidget();
+    }
+    window.addEventListener("resize", appendWidget);
+    return () => {
+      window.removeEventListener("resize", appendWidget);
+    };
+  }, [appendWidget]);
+
+  function createScript(src: string): HTMLScriptElement {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = src;
+    return script;
+  }
 
   function clearWidget() {
     if (widgetContainer !== null && widgetContainer.children.length) {

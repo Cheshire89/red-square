@@ -3,8 +3,55 @@ import AddressText from "../components/AddressText/AddressText";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import PageBanner from "../components/PageBanner/PageBanner";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { useEffect, useState } from "react";
+
+const containerStyle = {
+  width: "100%",
+  height: "400px",
+};
+
+const center = {
+  lat: 39.748333,
+  lng: -104.997539,
+};
+
+const styles = [
+  { stylers: [{ hue: "#dd0d0d" }] },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ lightness: 100 }, { visibility: "simplified" }],
+  },
+  {
+    featureType: "poi.business",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+];
+
+const options = {
+  minZoom: 17,
+  streetViewControl: false,
+  mapTypeControl: false,
+  styles,
+};
 
 export default function Contact() {
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+  });
+
+  const [map, setMap] = useState(null);
+  const [zoom, setZoom] = useState(17);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setZoom(17);
+    }, 300);
+  }, []);
+
   return (
     <>
       <PageBanner title="Contact Us" background="contact.jpg" />
@@ -12,7 +59,16 @@ export default function Contact() {
         <Container>
           <Row>
             <Col md={9}>
-              <img className="img-fluid" src="" alt="Map" />
+              {isLoaded && (
+                <GoogleMap
+                  mapContainerStyle={containerStyle}
+                  center={center}
+                  zoom={zoom}
+                  options={options}
+                >
+                  <Marker position={center} />
+                </GoogleMap>
+              )}
             </Col>
             <Col md={3}>
               <p>
