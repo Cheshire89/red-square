@@ -1,11 +1,21 @@
 .pageHeader {
   background-color: var(--theme-dark);
 
+  & > div {
+    margin-left: auto;
+  }
+
   .navbar-text,
   .nav-link {
     color: var(--theme-light);
     padding-top: 0px;
     padding-bottom: 0px;
     font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 550px) {
+    & > div {
+      margin: 0 auto;
+    }
   }
 }
