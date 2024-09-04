@@ -24,7 +24,7 @@ export default function AboutUs() {
                 part of the family.
               </p>
             </Col>
-            <Col md={6} className="d-flex justify-content-end">
+            <Col md={6} className="d-none d-md-flex justify-content-end">
               <div
                 className="placeholde-it"
                 data-text={`${_.startCase(appName)}`}

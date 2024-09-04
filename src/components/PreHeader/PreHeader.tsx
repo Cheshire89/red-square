@@ -11,8 +11,10 @@ export default function PreHeader() {
 
   return (
     <Navbar className="pageHeader">
-      <Nav className="ms-auto">
-        <Navbar.Text>Make Reservations Online or Call</Navbar.Text>
+      <Nav>
+        <Navbar.Text className="d-none d-md-block">
+          Make Reservations Online or Call
+        </Navbar.Text>
         <Nav.Link href={"tel:" + ui.phone}>
           <i className="fa-solid fa-phone"></i>
           {phoneFormatted}
