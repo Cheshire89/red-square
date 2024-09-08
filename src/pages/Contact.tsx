@@ -43,7 +43,6 @@ export default function Contact() {
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
   });
 
-  const [map, setMap] = useState(null);
   const [zoom, setZoom] = useState(17);
 
   useEffect(() => {
