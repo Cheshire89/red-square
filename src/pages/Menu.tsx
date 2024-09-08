@@ -11,6 +11,49 @@ import apiService from "../services/Api.service";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import "./Menu.scss";
 import VodkaBarHeader from "../components/MenuItems/VodkaBarHeader";
+import { parseInt } from "lodash";
+
+const starters: {
+  name: string;
+  desc: string;
+  price: number;
+  is_vegan: boolean;
+  is_gluten_free: boolean;
+  is_raw: boolean;
+}[] = [
+  {
+    name: "Mac & Cheese",
+    desc: "",
+    price: 8,
+    is_vegan: false,
+    is_gluten_free: false,
+    is_raw: false,
+  },
+  {
+    name: "Goat cheese polenta",
+    desc: "",
+    price: 7,
+    is_vegan: false,
+    is_gluten_free: false,
+    is_raw: false,
+  },
+  {
+    name: "Mashed potatoes",
+    desc: "",
+    price: 7,
+    is_vegan: false,
+    is_gluten_free: false,
+    is_raw: false,
+  },
+  {
+    name: "Cucumber-Mint salad",
+    desc: "",
+    price: 7,
+    is_vegan: false,
+    is_gluten_free: false,
+    is_raw: false,
+  },
+];
 
 export default function Menu() {
   const [menuData, setMenuData] = useState<any | null>(null);
@@ -27,6 +70,29 @@ export default function Menu() {
           setData(() => res.data.data![section]);
         }
       });
+    }
+
+    if (menuData) {
+      starters.forEach((item) => {
+        // apiService.createMenuItem({
+        //   category_id: ["v6jgstflqgoowvv"],
+        //   ...item,
+        // });
+      });
+      // const calls: any[] = [];
+      // const locSection = menuData["dessert"];
+      // console.log("data", locSection);
+      // locSection.forEach((item: MenuItem) => {
+      //   apiService.createMenuItem({
+      //     category_id: ["v6jgstflqgoowvv"],
+      //     name: item.itemTitle,
+      //     desc: item.itemDesc,
+      //     price: parseInt(item.itemPrice),
+      //     is_vegan: false,
+      //     is_gluten_free: false,
+      //     is_raw: false,
+      //   });
+      // });
     }
   }, [section, menuData]);
 

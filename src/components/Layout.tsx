@@ -7,8 +7,21 @@ import { setUI } from "../ui/store/ui.slice";
 import PreHeader from "./PreHeader/PreHeader";
 import { UiTheme } from "@uiStore/ui.model";
 import api from "../services/Api.service";
+import PocketBase from "pocketbase";
 
 export default function Layout() {
+  const pb = new PocketBase(process.env.REACT_APP_API_URL_ALT);
+  useEffect(() => {
+    if (!pb.authStore.isValid) {
+      const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
+      pb.collection("users").authWithPassword(
+        REACT_APP_API_USERNAME,
+        REACT_APP_API_PASS
+      );
+    }
+    console.log("auth", pb.authStore.isValid);
+  }, []);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

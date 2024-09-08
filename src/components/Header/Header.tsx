@@ -52,7 +52,7 @@ export default function Header() {
           <Link to={"/"}>
             <img
               className="img-fluid"
-              src={logo}
+              src="RedSquareLogo.jpg"
               alt={ui.name}
               style={{ maxHeight: "70px" }}
             />
