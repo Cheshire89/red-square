@@ -3,24 +3,24 @@ import { UiState } from "@uiStore/ui.model";
 import axios, { AxiosResponse } from "axios";
 import PocketBase from "pocketbase";
 
-interface pbMenuItemCreate {
-  category_id: string[];
-  name: string;
-  desc: string;
-  price: number;
-  is_vegan: boolean;
-  is_gluten_free: boolean;
-  is_raw: boolean;
-}
+// interface pbMenuItemCreate {
+//   category_id: string[];
+//   name: string;
+//   desc: string;
+//   price: number;
+//   is_vegan: boolean;
+//   is_gluten_free: boolean;
+//   is_raw: boolean;
+// }
 
-interface pbWineItemCreate {
-  category_id: string[];
-  name: string;
-  price_glass: number;
-  price_bottle: number;
-  type: string;
-  country: string;
-}
+// interface pbWineItemCreate {
+//   category_id: string[];
+//   name: string;
+//   price_glass: number;
+//   price_bottle: number;
+//   type: string;
+//   country: string;
+// }
 
 interface ApiResponse<T> {
   id: string;
@@ -63,14 +63,6 @@ class Api {
   getProfile(): Promise<AxiosResponse<ApiResponse<UiState>>> {
     const url = this.createUrl("profile");
     return axios.get(url);
-  }
-
-  createMenuItem(item: pbMenuItemCreate) {
-    this.pb.collection("menuItem").create(item, { requestKey: null });
-  }
-
-  createWineItem(item: pbWineItemCreate) {
-    return this.pb.collection("wineItem").create(item, { requestKey: null });
   }
 }
 

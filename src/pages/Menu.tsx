@@ -11,7 +11,6 @@ import apiService from "../services/Api.service";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import "./Menu.scss";
 import VodkaBarHeader from "../components/MenuItems/VodkaBarHeader";
-import { parseInt } from "lodash";
 
 const starters: {
   name: string;

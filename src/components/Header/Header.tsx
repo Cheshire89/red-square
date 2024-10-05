@@ -6,21 +6,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import logo from "@assets/RedSquareLogo.jpg";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import { NavigationLink } from "../../models/NavigationLink.model";
 
 import "./Header.scss";
-import apiService from "../../services/Api.service";
+import { useAuthContext } from "../../context/Auth.context";
 
 export default function Header() {
-  const ui = useSelector((state: RootState) => state.ui);
+  const [_, pb] = useAuthContext();
+  const profile = useSelector((state: RootState) => state.profile);
   const [links, setLinks] = useState<NavigationLink[] | null>(null);
 
   useEffect(() => {
-    apiService.getNavigation().then((res) => setLinks(() => res.data.data));
-  }, []);
+    pb.collection("navigation")
+      .getFirstListItem(`profile="${profile.id}"`)
+      .then((res) => setLinks(res.data));
+  }, [pb, profile]);
 
   const renderLink = (links: NavigationLink[], nested = false): any => {
     return links.map(({ link, label, children }, index) => {
@@ -53,7 +55,7 @@ export default function Header() {
             <img
               className="img-fluid"
               src="RedSquareLogo.jpg"
-              alt={ui.name}
+              alt={profile?.appName || ""}
               style={{ maxHeight: "70px" }}
             />
           </Link>

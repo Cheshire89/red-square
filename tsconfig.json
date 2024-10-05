@@ -28,8 +28,12 @@
       "@models/*": [
         "./src/models/*"
       ],
+
       "@uiStore/*": [
-        "./src/ui/store/*"
+        "./src/store/ui/*"
+      ],
+      "@authStore/*": [
+        "./src/store/auth/*"
       ]
     }
   },
