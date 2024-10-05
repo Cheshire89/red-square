@@ -37,9 +37,10 @@
     "yarn": "^1.22.22"
   },
   "scripts": {
-    "start": "concurrently \"npm run start.ui\" \"npm run start.server\"",
+    "start": "concurrently \"npm run start.ui\" \"npm run start.server\" \"npm run start:db\"",
     "start.ui": "craco start",
     "start.server": "npx json-server ./db.json -p 4200",
+    "start:db": "pocketbase serve --dir ./pocketbase/pb_data",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject"

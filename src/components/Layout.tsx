@@ -1,30 +1,29 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setUI } from "../ui/store/ui.slice";
 import PreHeader from "./PreHeader/PreHeader";
+
+import { setUI } from "@uiStore/ui.slice";
 import { UiTheme } from "@uiStore/ui.model";
+
 import api from "../services/Api.service";
-import PocketBase from "pocketbase";
+
+import { AuthContext, useAuthContext } from "../context/Auth.context";
+import { setProfile } from "../store/profile/profile.slice";
 
 export default function Layout() {
-  const pb = new PocketBase(process.env.REACT_APP_API_URL_ALT);
-  useEffect(() => {
-    if (!pb.authStore.isValid) {
-      const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
-      pb.collection("users").authWithPassword(
-        REACT_APP_API_USERNAME,
-        REACT_APP_API_PASS
-      );
-    }
-    console.log("auth", pb.authStore.isValid);
-  }, []);
+  const [_, pb] = useAuthContext();
+  const [token] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    pb.collection("profile")
+      .getFirstListItem(`appName="${process.env.REACT_APP_APP_NAME}"`)
+      .then((res) => dispatch(setProfile(res)));
+
     api.getProfile().then((res: any) => {
       const { theme, ...state } = res.data;
       dispatch(setUI(state));
@@ -32,7 +31,7 @@ export default function Layout() {
         setTheme(theme);
       }
     });
-  }, [dispatch]);
+  }, [dispatch, pb]);
 
   const setTheme = (theme: UiTheme) => {
     for (const [key, value] of Object.entries(theme)) {
@@ -42,10 +41,16 @@ export default function Layout() {
 
   return (
     <main>
-      <PreHeader />
-      <Header />
-      <Outlet />
-      <Footer />
+      <AuthContext.Provider
+        value={{
+          token,
+        }}
+      >
+        <PreHeader />
+        <Header />
+        <Outlet />
+        <Footer />
+      </AuthContext.Provider>
     </main>
   );
 }
