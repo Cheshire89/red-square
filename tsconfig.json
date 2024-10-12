@@ -6,11 +6,7 @@
       }
     ],
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,22 +19,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "strictNullChecks": false,
     "jsx": "react-jsx",
     "paths": {
-      "@models/*": [
-        "./src/models/*"
-      ],
+      "@models/*": ["./src/models/*"],
 
-      "@uiStore/*": [
-        "./src/store/ui/*"
-      ],
-      "@authStore/*": [
-        "./src/store/auth/*"
-      ]
+      "@uiStore/*": ["./src/store/ui/*"],
+      "@authStore/*": ["./src/store/auth/*"],
+      "@profileStore/*": ["./src/store/profile/*"],
+      "@socialStore/*": ["./src/store/social/*"]
     }
   },
-  "include": [
-    "src",
-    "environment.d.ts"
-  ]
+  "include": ["src", "environment.d.ts"]
 }
