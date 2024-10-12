@@ -20,7 +20,8 @@ const events = [
 ];
 
 export default function CallOut() {
-  const { name } = useSelector((state: RootState) => state.ui);
+  const { appName } = useSelector((state: RootState) => state.profile);
+
   return (
     <Container>
       <Grid container={true} spacing={2}>
@@ -34,7 +35,7 @@ export default function CallOut() {
           <img src={lemonTartImg} alt="Lemon Tart" />
         </Grid>
         <Grid item xs={6} sm={6} md={3}>
-          <img src={patioImg} alt={`${name} patio`} />
+          <img src={patioImg} alt={`${appName} patio`} />
         </Grid>
       </Grid>
       <p className={styles.calloutText}>

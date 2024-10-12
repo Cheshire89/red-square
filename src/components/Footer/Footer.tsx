@@ -1,38 +1,53 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import SocialLinks from "../SocialLinks/SocialLinks";
-import RedSquareLogoSquare from "@assets/RedSquareLogo-square.jpg";
 import { Container, Row, Col } from "react-bootstrap";
 import styles from "./Footer.module.scss";
-import { getAddress } from "@uiStore/ui.slice";
+import { getAddress } from "@profileStore/profile.slice";
+import { getFooterLogo } from "../../store/theme/theme.slice";
 
 export default function Footer() {
-  const { hours, ...ui } = useSelector((state: RootState) => state.ui);
   const address = useSelector(getAddress);
+  const { hours, appName } = useSelector((state: RootState) => state.profile);
+  const footerLogo = useSelector(getFooterLogo);
 
   return (
     <section className={styles.footerContainer}>
       <Container>
         <Row>
           <Col md={4}>
-            <img src={RedSquareLogoSquare} alt={ui.name} />
+            <img src={footerLogo} alt={appName} />
           </Col>
-          <Col md={4}>
-            <ul className="list-unstyled">
-              {address.map((line) => (
-                <li key={line}>{line}</li>
-              ))}
-            </ul>
-            <SocialLinks alt />
-          </Col>
-          <Col md={4}>
-            <ul className="list-unstyled">
-              <li>Kitchen Hours</li>
-              <li>{hours.kitchen}</li>
-              <li>Bar Hours</li>
-              <li>{hours.bar}</li>
-            </ul>
-          </Col>
+
+          {address && (
+            <Col md={4}>
+              <ul className="list-unstyled">
+                {address.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <SocialLinks alt />
+            </Col>
+          )}
+
+          {hours && (
+            <Col md={4}>
+              <ul className="list-unstyled">
+                {hours?.kitchen && (
+                  <>
+                    <li>Kitchen Hours</li>
+                    <li>{hours.kitchen}</li>
+                  </>
+                )}
+                {hours?.bar && (
+                  <>
+                    <li>Bar Hours</li>
+                    <li>{hours.bar}</li>
+                  </>
+                )}
+              </ul>
+            </Col>
+          )}
         </Row>
       </Container>
     </section>

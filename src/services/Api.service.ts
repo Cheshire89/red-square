@@ -1,26 +1,6 @@
 import { NavigationLink } from "@models/NavigationLink.model";
-import { UiState } from "@uiStore/ui.model";
 import axios, { AxiosResponse } from "axios";
 import PocketBase from "pocketbase";
-
-// interface pbMenuItemCreate {
-//   category_id: string[];
-//   name: string;
-//   desc: string;
-//   price: number;
-//   is_vegan: boolean;
-//   is_gluten_free: boolean;
-//   is_raw: boolean;
-// }
-
-// interface pbWineItemCreate {
-//   category_id: string[];
-//   name: string;
-//   price_glass: number;
-//   price_bottle: number;
-//   type: string;
-//   country: string;
-// }
 
 interface ApiResponse<T> {
   id: string;
@@ -59,11 +39,8 @@ class Api {
     const url = this.createUrl("menu");
     return axios.get(url);
   }
-
-  getProfile(): Promise<AxiosResponse<ApiResponse<UiState>>> {
-    const url = this.createUrl("profile");
-    return axios.get(url);
-  }
 }
 
-export default new Api();
+const api = new Api();
+
+export default api;

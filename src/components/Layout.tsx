@@ -1,56 +1,67 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import PreHeader from "./PreHeader/PreHeader";
 
-import { setUI } from "@uiStore/ui.slice";
-import { UiTheme } from "@uiStore/ui.model";
-
-import api from "../services/Api.service";
-
-import { AuthContext, useAuthContext } from "../context/Auth.context";
 import { setProfile } from "../store/profile/profile.slice";
+import { setTheme } from "../store/theme/theme.slice";
+import PocketBase from "pocketbase";
 
 export default function Layout() {
-  const [_, pb] = useAuthContext();
-  const [token] = useState(null);
-
+  const pb = useMemo(
+    () => new PocketBase(process.env.REACT_APP_API_URL_ALT),
+    []
+  );
   const dispatch = useDispatch();
 
+  const init = useCallback(async () => {
+    const profile = await pb
+      .collection("profile")
+      .getOne(process.env.REACT_APP_ID);
+
+    if (profile) {
+      dispatch(setProfile(profile));
+    }
+
+    const theme: any = await pb
+      .collection("theme")
+      .getFirstListItem(`profile="${process.env.REACT_APP_ID}"`);
+
+    if (theme) {
+      const { logo, footerLogo, id, collectionId, ...other } = theme;
+      setCssVars(other);
+      dispatch(setTheme({ logo, footerLogo, id, collectionId }));
+    }
+  }, [pb, dispatch]);
+
   useEffect(() => {
-    pb.collection("profile")
-      .getFirstListItem(`appName="${process.env.REACT_APP_APP_NAME}"`)
-      .then((res) => dispatch(setProfile(res)));
+    init();
+    if (!pb.authStore.isValid) {
+      const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
+      pb.collection("users").authWithPassword(
+        REACT_APP_API_USERNAME,
+        REACT_APP_API_PASS
+      );
+    }
+  }, [dispatch, pb, init]);
 
-    api.getProfile().then((res: any) => {
-      const { theme, ...state } = res.data;
-      dispatch(setUI(state));
-      if (!!theme) {
-        setTheme(theme);
-      }
-    });
-  }, [dispatch, pb]);
-
-  const setTheme = (theme: UiTheme) => {
+  const setCssVars = (theme: any) => {
     for (const [key, value] of Object.entries(theme)) {
-      document.documentElement.style.setProperty(`--theme-${key}`, value);
+      document.documentElement.style.setProperty(
+        `--theme-${key}`,
+        value as string
+      );
     }
   };
 
   return (
     <main>
-      <AuthContext.Provider
-        value={{
-          token,
-        }}
-      >
-        <PreHeader />
-        <Header />
-        <Outlet />
-        <Footer />
-      </AuthContext.Provider>
+      <PreHeader />
+      <Header />
+      <Outlet />
+      <Footer />
     </main>
   );
 }

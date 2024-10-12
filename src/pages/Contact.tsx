@@ -5,15 +5,12 @@ import PageBanner from "../components/PageBanner/PageBanner";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getCoordinates } from "@profileStore/profile.slice";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
-};
-
-const center = {
-  lat: 39.748333,
-  lng: -104.997539,
 };
 
 const styles = [
@@ -38,6 +35,7 @@ const options = {
 };
 
 export default function Contact() {
+  const center = useSelector(getCoordinates);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
