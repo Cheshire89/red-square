@@ -23,9 +23,6 @@
     "jsx": "react-jsx",
     "paths": {
       "@models/*": ["./src/models/*"],
-
-      "@uiStore/*": ["./src/store/ui/*"],
-      "@authStore/*": ["./src/store/auth/*"],
       "@profileStore/*": ["./src/store/profile/*"],
       "@socialStore/*": ["./src/store/social/*"]
     }

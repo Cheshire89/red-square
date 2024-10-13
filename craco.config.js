@@ -3,8 +3,8 @@ module.exports = {
   webpack: {
     alias: {
       "@assets": path.resolve(__dirname, "src/assets"),
-      "@uiStore": path.resolve(__dirname, "src/store/ui"),
-      "@authStore": path.resolve(__dirname, "src/store/auth"),
+      "@profileStore": path.resolve(__dirname, "src/store/profile"),
+      "@socialStore": path.resolve(__dirname, "src/store/social"),
     },
   },
 };
