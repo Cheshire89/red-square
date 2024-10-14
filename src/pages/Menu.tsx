@@ -7,10 +7,18 @@ import { MenuItem, VodkaItem, WineItem } from "@models/MenuItem.model";
 import VodkaMenuItem from "../components/MenuItems/VodkaMenuItem";
 import FoodMenuItem from "../components/MenuItems/FoodMenuItem";
 import WineMenuItem from "../components/MenuItems/WineMenuItem";
-import apiService from "../services/Api.service";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import "./Menu.scss";
 import VodkaBarHeader from "../components/MenuItems/VodkaBarHeader";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getMenuData,
+  getMenuDataByPageName,
+  getMenuError,
+  getMenuStatus,
+  getPage,
+  setPage,
+} from "@menuStore/menu.slice";
 
 const starters: {
   name: string;
@@ -55,45 +63,46 @@ const starters: {
 ];
 
 export default function Menu() {
-  const [menuData, setMenuData] = useState<any | null>(null);
+  const dispatch = useDispatch<any>();
+  const menuPage = useSelector(getPage);
+  const menuData = useSelector(getMenuData);
+  const menuStatus = useSelector(getMenuStatus);
+  const menuError = useSelector(getMenuError);
+
+  // const [menuData, setMenuData] = useState<any | null>(null);
   const [data, setData] = useState<any | null>(null);
   const { section } = useParams();
 
   useEffect(() => {
-    if (menuData && section) {
-      setData(menuData[section]);
-    } else {
-      apiService.getMenu().then((res) => {
-        setMenuData(() => res.data.data);
-        if (section && res.data?.data && res.data?.data[section]) {
-          setData(() => res.data.data![section]);
-        }
-      });
+    const page = section.replace(/\-/g, " ");
+    if (menuPage !== page) {
+      dispatch(setPage(page));
     }
+    if (menuStatus === "idle") {
+      dispatch(getMenuDataByPageName(page));
+    }
+  }, [section, menuStatus, dispatch]);
 
-    if (menuData) {
-      starters.forEach((item) => {
-        // apiService.createMenuItem({
-        //   category_id: ["v6jgstflqgoowvv"],
-        //   ...item,
-        // });
-      });
-      // const calls: any[] = [];
-      // const locSection = menuData["dessert"];
-      // console.log("data", locSection);
-      // locSection.forEach((item: MenuItem) => {
-      //   apiService.createMenuItem({
-      //     category_id: ["v6jgstflqgoowvv"],
-      //     name: item.itemTitle,
-      //     desc: item.itemDesc,
-      //     price: parseInt(item.itemPrice),
-      //     is_vegan: false,
-      //     is_gluten_free: false,
-      //     is_raw: false,
-      //   });
-      // });
-    }
-  }, [section, menuData]);
+  // const init = useCallback(async () => {
+  //   const data = await pb
+  //     .collection("menu")
+  //     .getFirstListItem(
+  //       `profile_id="${process.env.REACT_APP_ID}" && name="${section}"`
+  //     )
+  //     .then((menu) =>
+  //       pb.collection("category").getFullList({
+  //         filter: `menu_id?~"${menu.id}"`,
+  //       })
+  //     )
+  //     .then((categories) =>
+  //       pb.collection("menuItem").getFullList({
+  //         filter: categories.map(({ id }) => `category_id?~"${id}"`).join("||"),
+  //         expand: "category_id",
+  //       })
+  //     );
+
+  //   console.log("data", data);
+  // }, []);
 
   const renderDinner = (sectionTitle: string, data: any) => (
     <>
@@ -122,7 +131,7 @@ export default function Menu() {
   );
 
   const renderSipsAndSnacks = (sectionTitle: string, data: any) => {
-    if (sectionTitle !== "wines") {
+    if (sectionTitle !== "wine") {
       return (
         <>
           <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
@@ -160,53 +169,56 @@ export default function Menu() {
     </>
   );
 
-  const renderDessert = (data: any) => (
-    <ul className="list-unstyled">
-      {Array.isArray(data) &&
-        data.map((item: MenuItem, index: number) => {
-          const key = `${item.itemTitle}-${index + 1}`;
-          return <FoodMenuItem item={item} key={key} />;
-        })}
-    </ul>
-  );
+  const renderDessert = (data: any) => {
+    // console;
+    return (
+      <ul className="list-unstyled">
+        {Array.isArray(data) &&
+          data.map((item: MenuItem, index: number) => {
+            const key = `${item.name}-${index + 1}`;
+            return <FoodMenuItem item={item} key={key} />;
+          })}
+      </ul>
+    );
+  };
 
   const renderSection = (sectionTitle: string, section: string, data: any) => {
     switch (section) {
-      case "dinner":
-        return renderDinner(sectionTitle, data);
+      case "wine":
+        return renderWines(sectionTitle, data);
       case "vodka-bar":
         return renderVodka(sectionTitle, data);
       case "sips-and-snacks":
         return renderSipsAndSnacks(sectionTitle, data);
+      default:
+        return renderDinner(sectionTitle, data);
     }
   };
 
   const isDrinks = (sectionTitle: string): boolean => {
-    return sectionTitle === "wines" || sectionTitle === "cocktails";
+    return sectionTitle === "wine" || sectionTitle === "cocktails";
   };
 
   return (
     <>
       <PageBanner title={section || ""} background={`${section}.jpg`} />
-      {data !== null && (
+      {menuData !== null && (
         <ContentBlock>
           <Container>
             {section === "vodka-bar" && <VodkaBarHeader />}
             <Row>
-              {section !== "dessert"
-                ? Object.keys(data).map((sectionTitle, index) => (
-                    <Col
-                      className="mt-5"
-                      key={sectionTitle + index}
-                      xs={12}
-                      sm={{
-                        span: isDrinks(sectionTitle) ? 6 : 12,
-                      }}
-                    >
-                      {section && renderSection(sectionTitle, section, data)}
-                    </Col>
-                  ))
-                : renderDessert(data)}
+              {Object.keys(menuData).map((sectionTitle, index) => (
+                <Col
+                  className="mt-5"
+                  key={sectionTitle + index}
+                  xs={12}
+                  sm={{
+                    span: isDrinks(sectionTitle) ? 6 : 12,
+                  }}
+                >
+                  {section && renderSection(sectionTitle, section, menuData)}
+                </Col>
+              ))}
             </Row>
           </Container>
         </ContentBlock>

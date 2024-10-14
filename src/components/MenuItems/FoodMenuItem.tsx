@@ -2,13 +2,13 @@ import { MenuItem } from "@models/MenuItem.model";
 import styles from "./MenuItems.module.scss";
 
 export default function FoodMenuItem({ item }: { item: MenuItem }) {
-  const { itemTitle, itemDesc, itemPrice }: MenuItem = item;
+  const { name, desc, price }: MenuItem = item;
   return (
     <li className={styles.foodItem}>
-      <strong>{itemTitle}</strong>
+      <strong>{name}</strong>
       <p>
-        <span>{itemDesc}</span>
-        <span>${itemPrice}</span>
+        <span>{desc}</span>
+        <span>${price}</span>
       </p>
     </li>
   );
