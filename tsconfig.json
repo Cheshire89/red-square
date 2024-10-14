@@ -24,7 +24,8 @@
     "paths": {
       "@models/*": ["./src/models/*"],
       "@profileStore/*": ["./src/store/profile/*"],
-      "@socialStore/*": ["./src/store/social/*"]
+      "@socialStore/*": ["./src/store/social/*"],
+      "@menuStore/*": ["./src/store/menu/*"]
     }
   },
   "include": ["src", "environment.d.ts"]
