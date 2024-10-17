@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /pocketbase/pb_migrations/*
+/pocketbase/pb_data/logs.db
+/pocketbase/pb_data/logs.db-shm
