@@ -23,24 +23,8 @@
   @extend %menuItem;
 }
 
+.wineItem,
 .vodkaItem {
-  @extend %menuItem;
-}
-
-.vodkaItemPrice {
-  span:first-child {
-    display: inline-block;
-    transform: translateX(-10vw);
-    @media screen and (max-width: 990px) {
-      transform: translateX(-20vw);
-    }
-    @media screen and (max-width: 575px) {
-      transform: translateX(-30vw);
-    }
-  }
-}
-
-.wineItem {
   @extend %menuItem;
   i {
     margin-left: 5px;

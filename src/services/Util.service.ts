@@ -7,4 +7,14 @@ export class Util {
     }
     return null;
   }
+
+  static sortBy(collection: any[], key: string) {
+    return collection.reduce(
+      (acc: any, cur: any) => ({
+        ...acc,
+        [cur[key]]: [...(acc[cur[key]] || []), cur],
+      }),
+      {}
+    );
+  }
 }

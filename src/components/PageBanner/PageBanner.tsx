@@ -11,7 +11,7 @@ export default function PageBanner({ title, background }: PageBannerParams) {
       <span
         className="overlay"
         style={{
-          backgroundImage: background ? `url(/${background})` : "",
+          backgroundImage: background ? `url(/${background})` : "dinner.jpg",
         }}
       ></span>
       <h1 className="text-uppercase header text-center text-bold">

@@ -6,10 +6,11 @@ export interface MenuItem extends RecordModel {
   price: number;
 }
 
-export interface VodkaItem {
-  vodkaTitle: string;
-  priceShot: string;
-  priceCarafe: string;
+export interface VodkaItem extends RecordModel {
+  name: string;
+  country: string;
+  price_shot: string;
+  price_carafe: string;
 }
 
 export interface WineItem extends RecordModel {
