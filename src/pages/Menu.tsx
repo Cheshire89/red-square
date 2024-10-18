@@ -69,8 +69,6 @@ export default function Menu() {
   const menuStatus = useSelector(getMenuStatus);
   const menuError = useSelector(getMenuError);
 
-  // const [menuData, setMenuData] = useState<any | null>(null);
-  const [data, setData] = useState<any | null>(null);
   const { section } = useParams();
 
   useEffect(() => {
@@ -83,30 +81,25 @@ export default function Menu() {
     }
   }, [section, menuStatus, dispatch]);
 
-  // const init = useCallback(async () => {
-  //   const data = await pb
-  //     .collection("menu")
-  //     .getFirstListItem(
-  //       `profile_id="${process.env.REACT_APP_ID}" && name="${section}"`
-  //     )
-  //     .then((menu) =>
-  //       pb.collection("category").getFullList({
-  //         filter: `menu_id?~"${menu.id}"`,
-  //       })
-  //     )
-  //     .then((categories) =>
-  //       pb.collection("menuItem").getFullList({
-  //         filter: categories.map(({ id }) => `category_id?~"${id}"`).join("||"),
-  //         expand: "category_id",
-  //       })
-  //     );
+  const renderVodka = (data: any) => {
+    return Object.entries(data).map(([title, value]) => {
+      return (
+        <div className="mb-5">
+          <strong>{title}</strong>
+          <ul className="list-unstyled menu-list">
+            {Array.isArray(value) &&
+              value.map((item: VodkaItem, index: number) => {
+                const key = `${title.replace(/\s/g, "")}-${index + 1}`;
+                return <VodkaMenuItem item={item} key={key} />;
+              })}
+          </ul>
+        </div>
+      );
+    });
+  };
 
-  //   console.log("data", data);
-  // }, []);
-
-  const renderDinner = (sectionTitle: string, data: any) => (
+  const renderFood = (sectionTitle: string, data: any) => (
     <>
-      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
       <ul className="list-unstyled">
         {Array.isArray(data[sectionTitle]) &&
           data[sectionTitle].map((item: MenuItem, index: number) => {
@@ -117,41 +110,8 @@ export default function Menu() {
     </>
   );
 
-  const renderVodka = (sectionTitle: string, data: any) => (
+  const renderWines = (data: any) => (
     <>
-      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
-      <ul className="list-unstyled menu-list">
-        {Array.isArray(data[sectionTitle]) &&
-          data[sectionTitle].map((item: VodkaItem, index: number) => {
-            const key = `${sectionTitle}-${index + 1}`;
-            return <VodkaMenuItem item={item} key={key} />;
-          })}
-      </ul>
-    </>
-  );
-
-  const renderSipsAndSnacks = (sectionTitle: string, data: any) => {
-    if (sectionTitle !== "wine") {
-      return (
-        <>
-          <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
-          <ul className="list-unstyled">
-            {Array.isArray(data[sectionTitle]) &&
-              data[sectionTitle].map((item: MenuItem, index: number) => {
-                const key = `${sectionTitle}-${index + 1}`;
-                return <FoodMenuItem item={item} key={key} />;
-              })}
-          </ul>
-        </>
-      );
-    } else {
-      return renderWines(sectionTitle, data[sectionTitle]);
-    }
-  };
-
-  const renderWines = (sectionTitle: string, data: any) => (
-    <>
-      <h3 className="menu__section-header header-spaced">{sectionTitle}</h3>
       {Object.keys(data).map((section, index) => {
         return (
           <ul key={section + index} className="list-unstyled">
@@ -169,34 +129,25 @@ export default function Menu() {
     </>
   );
 
-  const renderDessert = (data: any) => {
-    // console;
-    return (
-      <ul className="list-unstyled">
-        {Array.isArray(data) &&
-          data.map((item: MenuItem, index: number) => {
-            const key = `${item.name}-${index + 1}`;
-            return <FoodMenuItem item={item} key={key} />;
-          })}
-      </ul>
-    );
-  };
-
-  const renderSection = (sectionTitle: string, section: string, data: any) => {
-    switch (section) {
+  const renderSection = (sectionTitle: string, data: any) => {
+    switch (sectionTitle) {
       case "wine":
-        return renderWines(sectionTitle, data);
-      case "vodka-bar":
-        return renderVodka(sectionTitle, data);
-      case "sips-and-snacks":
-        return renderSipsAndSnacks(sectionTitle, data);
+        return renderWines(data[sectionTitle]);
+      case "vodka":
+        return renderVodka(data[sectionTitle]);
       default:
-        return renderDinner(sectionTitle, data);
+        return renderFood(sectionTitle, data);
     }
   };
 
   const isDrinks = (sectionTitle: string): boolean => {
-    return sectionTitle === "wine" || sectionTitle === "cocktails";
+    const sections = ["wine", "cocktails"];
+    return sections.includes(sectionTitle);
+  };
+
+  const dontRenderHeader = (sectionTitle: string): boolean => {
+    const sections = ["vodka", "dessert"];
+    return sections.includes(sectionTitle);
   };
 
   return (
@@ -213,10 +164,16 @@ export default function Menu() {
                   key={sectionTitle + index}
                   xs={12}
                   sm={{
-                    span: isDrinks(sectionTitle) ? 6 : 12,
+                    span: isDrinks(sectionTitle) && section !== "wine" ? 6 : 12,
                   }}
                 >
-                  {section && renderSection(sectionTitle, section, menuData)}
+                  {!dontRenderHeader(sectionTitle) && (
+                    <h3 className="menu__section-header header-spaced">
+                      {sectionTitle}
+                    </h3>
+                  )}
+
+                  {section && renderSection(sectionTitle, menuData)}
                 </Col>
               ))}
             </Row>

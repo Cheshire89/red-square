@@ -5,6 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import styles from "./Footer.module.scss";
 import { getAddress } from "@profileStore/profile.slice";
 import { getFooterLogo } from "../../store/theme/theme.slice";
+import _ from "lodash";
+import { Fragment } from "react/jsx-runtime";
 
 export default function Footer() {
   const address = useSelector(getAddress);
@@ -15,7 +17,7 @@ export default function Footer() {
     <section className={styles.footerContainer}>
       <Container>
         <Row>
-          <Col md={4}>
+          <Col md={4} className="d-flex align-items-center">
             <img src={footerLogo} alt={appName} />
           </Col>
 
@@ -33,7 +35,13 @@ export default function Footer() {
           {hours && (
             <Col md={4}>
               <ul className="list-unstyled">
-                {hours?.kitchen && (
+                {Object.entries(hours).map(([key, val]) => (
+                  <Fragment key={key}>
+                    <li>{_.capitalize(key)}</li>
+                    <li>{val}</li>
+                  </Fragment>
+                ))}
+                {/* {hours?.kitchen && (
                   <>
                     <li>Kitchen Hours</li>
                     <li>{hours.kitchen}</li>
@@ -44,7 +52,7 @@ export default function Footer() {
                     <li>Bar Hours</li>
                     <li>{hours.bar}</li>
                   </>
-                )}
+                )} */}
               </ul>
             </Col>
           )}

@@ -13,8 +13,8 @@ export function ContentBlock({
 }: ContentBlockParams) {
   const classes = `
     ${styles.container}
-    ${background ? `bg-${background}` : ""}
-    ${center ? `${styles.center}` : ""}
+    ${background ? ` bg-${background}` : ""}
+    ${center ? ` ${styles.center}` : ""}
   `;
   return (
     <section

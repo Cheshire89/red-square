@@ -62,10 +62,9 @@ export default function Header() {
         <Navbar.Brand>
           <Link to={"/"}>
             <img
-              className="img-fluid"
+              className="img-fluid logo"
               src={logo}
               alt={profile?.appName || ""}
-              style={{ maxHeight: "70px" }}
             />
           </Link>
         </Navbar.Brand>

@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk, AsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { MenuState } from "./menu.model";
-import PocketBase, { ListResult, RecordModel } from "pocketbase";
+import PocketBase, { RecordModel } from "pocketbase";
 import _ from "lodash";
-import { MenuItem } from "@mui/material";
+import { Util } from "../../services/Util.service";
 
 const initialState: MenuState = {
   page: null,
@@ -12,6 +12,41 @@ const initialState: MenuState = {
 };
 
 const pb = new PocketBase(process.env.REACT_APP_API_URL_ALT);
+
+const requestCollectionData = (categories: any[]): Promise<RecordModel[]>[] => {
+  const categoryNames = categories.map(({ name }) => name);
+  const expand = "category_id";
+  const filter = categories.map(({ id }) => `category_id?~"${id}"`).join("||");
+
+  const collections = [
+    pb.collection("menuItem").getFullList({
+      filter,
+      expand,
+    }),
+  ];
+
+  if (categoryNames.includes("wine")) {
+    collections.push(
+      pb.collection("wineItem").getFullList({
+        filter,
+        expand,
+        sort: "type, price_bottle",
+      })
+    );
+  }
+
+  if (categoryNames.includes("vodka")) {
+    collections.push(
+      pb.collection("vodkaItem").getFullList({
+        filter,
+        expand,
+        sort: "country",
+      })
+    );
+  }
+
+  return collections;
+};
 
 export const getMenuDataByPageName = createAsyncThunk(
   "menu/getMenuData",
@@ -29,21 +64,15 @@ export const getMenuDataByPageName = createAsyncThunk(
           })
         )
         .then((categories) => {
-          const filter = categories
-            .map(({ id }) => `category_id?~"${id}"`)
-            .join("||");
-          const expand = "category_id";
-          return Promise.all([
-            pb.collection("menuItem").getFullList({
-              filter,
-              expand,
-            }),
-            pb.collection("wineItem").getFullList({
-              filter,
-              expand: "category_id",
-              sort: "price_glass",
-            }),
-          ]).then((data) => data.flat());
+          console.log("categories", categories);
+          const collections = requestCollectionData(categories);
+          if (categories.length) {
+            return Promise.all(collections).then((data) => {
+              console.log("data");
+              return data.flat();
+            });
+          }
+          return Promise.resolve([]);
         });
       return data;
     } catch (e) {
@@ -79,26 +108,24 @@ const menuSlice = createSlice({
         state.status = "succeeded";
 
         const data = action.payload as any[];
+
         const res = data.reduce((acc, cur) => {
           const { expand, ...menuItem } = cur;
+          const key = expand.category_id.name || expand.category_id[0].name;
           return {
             ...acc,
-            [expand.category_id[0].name]: [
-              ...(acc[expand.category_id[0].name] || []),
-              menuItem,
-            ],
+            [key]: [...(acc[key] || []), menuItem],
           };
         }, {});
 
         if (res?.wine) {
-          res.wine = res.wine.reduce(
-            (acc: any, cur: any) => ({
-              ...acc,
-              [cur.type]: [...(acc[cur.type] || []), cur],
-            }),
-            {}
-          );
+          res.wine = Util.sortBy(res.wine, "type");
         }
+
+        if (res?.vodka) {
+          res.vodka = Util.sortBy(res.vodka, "country");
+        }
+
         state.data = res;
       })
       .addCase(getMenuDataByPageName.rejected, (state, action) => {

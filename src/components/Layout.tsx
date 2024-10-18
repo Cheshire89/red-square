@@ -14,6 +14,9 @@ export default function Layout() {
     () => new PocketBase(process.env.REACT_APP_API_URL_ALT),
     []
   );
+
+  pb.autoCancellation(false);
+
   const dispatch = useDispatch();
 
   const init = useCallback(async () => {
