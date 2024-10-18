@@ -1,9 +1,11 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import _ from "lodash";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 export default function AboutUs() {
-  const appName = process.env.REACT_APP_APPLICATION_NAME;
+  const profile = useSelector((state: RootState) => state.profile);
   return (
     <>
       <ContentBlock>
@@ -27,7 +29,7 @@ export default function AboutUs() {
             <Col md={6} className="d-none d-md-flex justify-content-end">
               <div
                 className="placeholde-it"
-                data-text={`${_.startCase(appName)}`}
+                data-text={`${_.startCase(profile?.appName)}`}
               ></div>
             </Col>
           </Row>
