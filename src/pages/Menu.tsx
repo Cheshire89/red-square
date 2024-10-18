@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import PageBanner from "../components/PageBanner/PageBanner";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { MenuItem, VodkaItem, WineItem } from "@models/MenuItem.model";
 
@@ -14,72 +14,28 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getMenuData,
   getMenuDataByPageName,
-  getMenuError,
   getMenuStatus,
   getPage,
   setPage,
 } from "@menuStore/menu.slice";
-
-const starters: {
-  name: string;
-  desc: string;
-  price: number;
-  is_vegan: boolean;
-  is_gluten_free: boolean;
-  is_raw: boolean;
-}[] = [
-  {
-    name: "Mac & Cheese",
-    desc: "",
-    price: 8,
-    is_vegan: false,
-    is_gluten_free: false,
-    is_raw: false,
-  },
-  {
-    name: "Goat cheese polenta",
-    desc: "",
-    price: 7,
-    is_vegan: false,
-    is_gluten_free: false,
-    is_raw: false,
-  },
-  {
-    name: "Mashed potatoes",
-    desc: "",
-    price: 7,
-    is_vegan: false,
-    is_gluten_free: false,
-    is_raw: false,
-  },
-  {
-    name: "Cucumber-Mint salad",
-    desc: "",
-    price: 7,
-    is_vegan: false,
-    is_gluten_free: false,
-    is_raw: false,
-  },
-];
 
 export default function Menu() {
   const dispatch = useDispatch<any>();
   const menuPage = useSelector(getPage);
   const menuData = useSelector(getMenuData);
   const menuStatus = useSelector(getMenuStatus);
-  const menuError = useSelector(getMenuError);
 
   const { section } = useParams();
 
   useEffect(() => {
-    const page = section.replace(/\-/g, " ");
+    const page = section.replace(/-/g, " ");
     if (menuPage !== page) {
       dispatch(setPage(page));
     }
     if (menuStatus === "idle") {
       dispatch(getMenuDataByPageName(page));
     }
-  }, [section, menuStatus, dispatch]);
+  }, [section, menuStatus, dispatch, menuPage]);
 
   const renderVodka = (data: any) => {
     return Object.entries(data).map(([title, value]) => {

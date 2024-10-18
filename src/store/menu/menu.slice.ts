@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { MenuState } from "./menu.model";
 import PocketBase, { RecordModel } from "pocketbase";
-import _ from "lodash";
 import { Util } from "../../services/Util.service";
 
 const initialState: MenuState = {
