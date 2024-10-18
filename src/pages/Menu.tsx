@@ -152,7 +152,14 @@ export default function Menu() {
 
   return (
     <>
-      <PageBanner title={section || ""} background={`${section}.jpg`} />
+      <PageBanner
+        title={section || ""}
+        background={
+          process.env.REACT_APP_ID === "eilv81c1e648nhv"
+            ? `${section}.jpg`
+            : "dinner.jpg"
+        }
+      />
       {menuData !== null && (
         <ContentBlock>
           <Container>
