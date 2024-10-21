@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { MenuState } from "./menu.model";
 import PocketBase, { RecordModel } from "pocketbase";
 import { Util } from "../../services/Util.service";
+import { MenuUtil } from "./menu.util";
 
 const initialState: MenuState = {
   page: null,
@@ -64,7 +65,9 @@ export const getMenuDataByPageName = createAsyncThunk(
         .then((categories) => {
           const collections = requestCollectionData(categories);
           if (categories.length) {
-            return Promise.all(collections).then((data) => data.flat());
+            return Promise.all(collections).then((data) =>
+              MenuUtil.parseByCategorySection(data.flat())
+            );
           }
           return Promise.resolve([]);
         });
@@ -98,35 +101,26 @@ const menuSlice = createSlice({
         state.page = action.meta.arg;
         state.status = "loading";
       })
-      .addCase(getMenuDataByPageName.fulfilled, (state, action) => {
-        state.status = "succeeded";
+      .addCase(
+        getMenuDataByPageName.fulfilled,
+        (state, { payload }: { payload: any }) => {
+          state.status = "succeeded";
 
-        const data = action.payload as any[];
+          if (payload?.wine) {
+            payload.wine = Util.sortBy(payload.wine, "type");
+          }
 
-        const res = data.reduce((acc, cur) => {
-          const { expand, ...menuItem } = cur;
-          const key = expand.category_id.name || expand.category_id[0].name;
-          return {
-            ...acc,
-            [key]: [...(acc[key] || []), menuItem],
-          };
-        }, {});
+          if (payload?.vodka) {
+            payload.vodka = Util.sortBy(payload.vodka, "country");
+          }
 
-        if (res?.wine) {
-          res.wine = Util.sortBy(res.wine, "type");
+          state.data = payload;
         }
-
-        if (res?.vodka) {
-          res.vodka = Util.sortBy(res.vodka, "country");
-        }
-
-        state.data = res;
-      })
+      )
       .addCase(getMenuDataByPageName.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
-    //   .addCase(getMenuDataByPageName.settled, (state.action) => {});
   },
 });
 
