@@ -27,3 +27,4 @@ yarn-error.log*
 /pocketbase/pb_data/logs.db
 /pocketbase/pb_data/logs.db-shm
 /pocketbase/pb_data/logs.db-wal
+
