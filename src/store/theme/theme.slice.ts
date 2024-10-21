@@ -9,7 +9,7 @@ const initialState: ThemeState = {
 };
 
 const filesUrl = (collectionId: string, id: string, image: string) => {
-  return `${process.env.REACT_APP_API_URL_ALT}/api/files/${collectionId}/${id}/${image}`;
+  return `${process.env.REACT_APP_API_URL}/api/files/${collectionId}/${id}/${image}`;
 };
 
 const themeSlice = createSlice({

@@ -11,11 +11,9 @@ import PocketBase from "pocketbase";
 
 export default function Layout() {
   const pb = useMemo(
-    () => new PocketBase(process.env.REACT_APP_API_URL_ALT),
+    () => new PocketBase(process.env.REACT_APP_API_URL),
     []
   );
-
-  pb.autoCancellation(false);
 
   const dispatch = useDispatch();
 
@@ -41,13 +39,13 @@ export default function Layout() {
 
   useEffect(() => {
     init();
-    if (!pb.authStore.isValid) {
-      const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
-      pb.collection("users").authWithPassword(
-        REACT_APP_API_USERNAME,
-        REACT_APP_API_PASS
-      );
-    }
+    // if (!pb.authStore.isValid) {
+    //   const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
+    //   pb.collection("users").authWithPassword(
+    //     REACT_APP_API_USERNAME,
+    //     REACT_APP_API_PASS
+    //   );
+    // }
   }, [dispatch, pb, init]);
 
   const setCssVars = (theme: any) => {

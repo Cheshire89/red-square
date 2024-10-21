@@ -9,7 +9,7 @@ import { SocialState } from "@socialStore/social.model";
 
 export default function SocialLinks(props: any) {
   const pb = useMemo(
-    () => new PocketBase(process.env.REACT_APP_API_URL_ALT),
+    () => new PocketBase(process.env.REACT_APP_API_URL),
     []
   );
   const name = useSelector((state: RootState) => state.profile.appName);
@@ -41,9 +41,8 @@ export default function SocialLinks(props: any) {
     }
   }, [init, social]);
 
-  const containerClass = `list-inline ${styles.socialLinks} ${
-    props.alt && styles["socialLinks--alt"]
-  }`;
+  const containerClass = `list-inline ${styles.socialLinks} ${props.alt && styles["socialLinks--alt"]
+    }`;
   const iconClass = (key: string) =>
     key !== "opentable" ? "fa-brands fa-" + key : "fa-solid fa-circle-dot";
 

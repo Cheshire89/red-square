@@ -10,7 +10,7 @@ const initialState: MenuState = {
   error: null,
 };
 
-const pb = new PocketBase(process.env.REACT_APP_API_URL_ALT);
+const pb = new PocketBase(process.env.REACT_APP_API_URL);
 
 const requestCollectionData = (categories: any[]): Promise<RecordModel[]>[] => {
   const categoryNames = categories.map(({ name }) => name);

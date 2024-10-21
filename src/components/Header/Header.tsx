@@ -17,7 +17,7 @@ import PocketBase from "pocketbase";
 
 export default function Header() {
   const pb = useMemo(
-    () => new PocketBase(process.env.REACT_APP_API_URL_ALT),
+    () => new PocketBase(process.env.REACT_APP_API_URL),
     []
   );
   const profile = useSelector((state: RootState) => state.profile);
