@@ -11,9 +11,10 @@ import {
 } from "@contentStore/content.slice";
 import { useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
+import { getProfileName } from "@profileStore/profile.slice";
 
 export default function AboutUs() {
-  const profile = useSelector((state: RootState) => state.profile);
+  const appName = useSelector(getProfileName);
   const dispatch = useDispatch<any>();
 
   const content = useSelector(getContent);
@@ -37,10 +38,7 @@ export default function AboutUs() {
               {ReactHtmlParser(content)}
             </Col>
             <Col md={6} className="d-none d-md-flex justify-content-end">
-              <div
-                className="placeholde-it"
-                data-text={`${_.startCase(profile?.appName)}`}
-              ></div>
+              <div className="placeholde-it" data-text={`${appName}`}></div>
             </Col>
           </Row>
         </Container>

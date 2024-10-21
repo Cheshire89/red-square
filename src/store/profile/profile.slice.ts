@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ProfileState } from "./profile.model";
 import { Util } from "../../services/Util.service";
+import _ from "lodash";
+
+const filesUrl = (collectionId: string, id: string, image: string) => {
+  return `${process.env.REACT_APP_API_URL}/api/files/${collectionId}/${id}/${image}`;
+};
 
 const initialState: ProfileState = {
   address: null,
@@ -19,6 +24,7 @@ const initialState: ProfileState = {
   lng: null,
   hours: null,
   openTable: null,
+  fav_icon: null,
 };
 
 const profileSlice = createSlice({
@@ -28,6 +34,9 @@ const profileSlice = createSlice({
     setProfile: (state, action) => action.payload,
   },
   selectors: {
+    getProfileName: ({ appName }): string => {
+      return _.startCase(appName);
+    },
     getFormattedNumber: ({ phone }): string => {
       return Util.formatPhoneNumber(phone) || phone;
     },
@@ -43,6 +52,9 @@ const profileSlice = createSlice({
     getOpenTableId: ({ openTable }) => {
       return openTable;
     },
+    getFavIcon: ({ collectionId, id, fav_icon }): string => {
+      return filesUrl(collectionId, id, fav_icon);
+    },
   },
 });
 
@@ -52,5 +64,7 @@ export const {
   getFormattedNumber,
   getCoordinates,
   getOpenTableId,
+  getProfileName,
+  getFavIcon,
 } = profileSlice.selectors;
 export default profileSlice.reducer;

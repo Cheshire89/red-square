@@ -2,14 +2,23 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import { useCallback, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PreHeader from "./PreHeader/PreHeader";
 
-import { setProfile } from "../store/profile/profile.slice";
+import {
+  getFavIcon,
+  getProfileName,
+  setProfile,
+} from "../store/profile/profile.slice";
 import { setTheme } from "../store/theme/theme.slice";
 import PocketBase from "pocketbase";
+import { Helmet } from "react-helmet";
+import _ from "lodash";
 
 export default function Layout() {
+  const appName = useSelector(getProfileName);
+  const favIcon = useSelector(getFavIcon);
+
   const pb = useMemo(() => new PocketBase(process.env.REACT_APP_API_URL), []);
 
   const dispatch = useDispatch();
@@ -48,11 +57,17 @@ export default function Layout() {
   };
 
   return (
-    <main>
-      <PreHeader />
-      <Header />
-      <Outlet />
-      <Footer />
-    </main>
+    <>
+      <Helmet>
+        <title>{appName}</title>
+        <link rel="icon" type="image/x-icon" href={favIcon}></link>
+      </Helmet>
+      <main>
+        <PreHeader />
+        <Header />
+        <Outlet />
+        <Footer />
+      </main>
+    </>
   );
 }
