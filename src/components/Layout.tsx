@@ -10,10 +10,7 @@ import { setTheme } from "../store/theme/theme.slice";
 import PocketBase from "pocketbase";
 
 export default function Layout() {
-  const pb = useMemo(
-    () => new PocketBase(process.env.REACT_APP_API_URL),
-    []
-  );
+  const pb = useMemo(() => new PocketBase(process.env.REACT_APP_API_URL), []);
 
   const dispatch = useDispatch();
 
@@ -39,14 +36,7 @@ export default function Layout() {
 
   useEffect(() => {
     init();
-    // if (!pb.authStore.isValid) {
-    //   const { REACT_APP_API_USERNAME, REACT_APP_API_PASS } = process.env;
-    //   pb.collection("users").authWithPassword(
-    //     REACT_APP_API_USERNAME,
-    //     REACT_APP_API_PASS
-    //   );
-    // }
-  }, [dispatch, pb, init]);
+  }, [init]);
 
   const setCssVars = (theme: any) => {
     for (const [key, value] of Object.entries(theme)) {

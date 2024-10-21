@@ -5,8 +5,16 @@ import PageBanner from "../components/PageBanner/PageBanner";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCoordinates } from "@profileStore/profile.slice";
+import {
+  getContent,
+  getContentStatus,
+  getPageConent,
+  setContent,
+} from "@contentStore/content.slice";
+import { useLocation } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 
 const containerStyle = {
   width: "100%",
@@ -35,7 +43,15 @@ const options = {
 };
 
 export default function Contact() {
+  const location = useLocation();
+  const page = location.pathname.replace("/", "");
+  const dispatch = useDispatch<any>();
+
+  const contentStatus = useSelector(getContentStatus);
+  const content = useSelector(getContent);
+
   const center = useSelector(getCoordinates);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
@@ -44,10 +60,17 @@ export default function Contact() {
   const [zoom, setZoom] = useState(17);
 
   useEffect(() => {
+    dispatch(setContent(page));
     setTimeout(() => {
       setZoom(17);
     }, 300);
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (contentStatus === "idle") {
+      dispatch(getPageConent(page));
+    }
+  }, [dispatch, contentStatus]);
 
   return (
     <>
@@ -68,13 +91,7 @@ export default function Contact() {
               )}
             </Col>
             <Col md={3}>
-              <p>
-                Located in the heart of downtown Denver, steps away from the
-                Performing Arts Complex, Red Square Euro Bistro is an oasis in
-                the city. A place where locals and savvy travelers alike can
-                meet, enjoy one of our 100 frozen vodkas, and pair drinks with
-                European inspired food..
-              </p>
+              {ReactHtmlParser(content)}
               <AddressText />
               <h3 className="header-spaced text-uppercase">Find us on</h3>
               <SocialLinks />

@@ -9,7 +9,6 @@ import { ContentBlock } from "../../components/ContentBlock/ContentBlock";
 import { useEffect } from "react";
 import { debounce } from "lodash";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import { getOpenTableId } from "@profileStore/profile.slice";
 
 const widgetUrl = (

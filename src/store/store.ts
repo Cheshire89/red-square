@@ -3,6 +3,7 @@ import profileSlice from "./profile/profile.slice";
 import themeSlice from "./theme/theme.slice";
 import socialSlice from "./social/social.slice";
 import menuSlice from "./menu/menu.slice";
+import contentSlice from "./content/content.slice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     theme: themeSlice,
     social: socialSlice,
     menu: menuSlice,
+    content: contentSlice,
   },
 });
 

@@ -3,6 +3,7 @@ import { MenuState } from "./menu.model";
 import PocketBase, { RecordModel } from "pocketbase";
 import { Util } from "../../services/Util.service";
 import { MenuUtil } from "./menu.util";
+import { Collections } from "../../pbmodels";
 
 const initialState: MenuState = {
   page: null,
@@ -53,7 +54,7 @@ export const getMenuDataByPageName = createAsyncThunk(
   async (pageName: string) => {
     try {
       const data: RecordModel[] = await pb
-        .collection("menu")
+        .collection(Collections.Menu)
         .getFirstListItem(
           `profile_id="${process.env.REACT_APP_ID}" && name="${pageName}"`
         )

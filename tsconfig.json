@@ -22,10 +22,12 @@
     "strictNullChecks": false,
     "jsx": "react-jsx",
     "paths": {
+      "@pbmodels/*": ["./src/pbmodels.ts"],
       "@models/*": ["./src/models/*"],
       "@profileStore/*": ["./src/store/profile/*"],
       "@socialStore/*": ["./src/store/social/*"],
-      "@menuStore/*": ["./src/store/menu/*"]
+      "@menuStore/*": ["./src/store/menu/*"],
+      "@contentStore/*": ["./src/store/content/*"]
     }
   },
   "include": ["src", "environment.d.ts"]

@@ -7,6 +7,7 @@ import type { RecordService } from 'pocketbase'
 
 export enum Collections {
 	Category = "category",
+	Content = "content",
 	Menu = "menu",
 	MenuItem = "menuItem",
 	Navigation = "navigation",
@@ -45,6 +46,12 @@ export type AuthSystemFields<T = never> = {
 export type CategoryRecord = {
 	menu_id?: RecordIdString[]
 	name?: string
+}
+
+export type ContentRecord = {
+	content?: HTMLString
+	page_name: string
+	profile_id: RecordIdString
 }
 
 export type MenuRecord = {
@@ -125,15 +132,16 @@ export enum WineItemTypeOptions {
 }
 export type WineItemRecord = {
 	category_id?: RecordIdString[]
-	country?: string
-	name?: string
+	country: string
+	name: string
 	price_bottle?: number
 	price_glass?: number
-	type?: WineItemTypeOptions
+	type: WineItemTypeOptions
 }
 
 // Response types include system fields and match responses from the PocketBase API
 export type CategoryResponse<Texpand = unknown> = Required<CategoryRecord> & BaseSystemFields<Texpand>
+export type ContentResponse<Texpand = unknown> = Required<ContentRecord> & BaseSystemFields<Texpand>
 export type MenuResponse<Texpand = unknown> = Required<MenuRecord> & BaseSystemFields<Texpand>
 export type MenuItemResponse<Texpand = unknown> = Required<MenuItemRecord> & BaseSystemFields<Texpand>
 export type NavigationResponse<Tdata = unknown, Texpand = unknown> = Required<NavigationRecord<Tdata>> & BaseSystemFields<Texpand>
@@ -148,6 +156,7 @@ export type WineItemResponse<Texpand = unknown> = Required<WineItemRecord> & Bas
 
 export type CollectionRecords = {
 	category: CategoryRecord
+	content: ContentRecord
 	menu: MenuRecord
 	menuItem: MenuItemRecord
 	navigation: NavigationRecord
@@ -161,6 +170,7 @@ export type CollectionRecords = {
 
 export type CollectionResponses = {
 	category: CategoryResponse
+	content: ContentResponse
 	menu: MenuResponse
 	menuItem: MenuItemResponse
 	navigation: NavigationResponse
@@ -177,6 +187,7 @@ export type CollectionResponses = {
 
 export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'category'): RecordService<CategoryResponse>
+	collection(idOrName: 'content'): RecordService<ContentResponse>
 	collection(idOrName: 'menu'): RecordService<MenuResponse>
 	collection(idOrName: 'menuItem'): RecordService<MenuItemResponse>
 	collection(idOrName: 'navigation'): RecordService<NavigationResponse>

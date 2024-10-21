@@ -1,6 +1,6 @@
-export interface MenuState {
+import { ThunkedState } from "@models/ThunkedState";
+
+export interface MenuState extends ThunkedState {
   page: string;
   data: any[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string;
 }
