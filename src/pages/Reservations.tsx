@@ -3,10 +3,32 @@ import AddressText from "../components/AddressText/AddressText";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOpenTableId } from "@profileStore/profile.slice";
+import {
+  getContent,
+  getContentStatus,
+  getPageContent,
+  setContent,
+} from "@contentStore/content.slice";
+import ReactHtmlParser from "react-html-parser";
 
 export default function Reservations() {
+  const dispatch = useDispatch<any>();
+
+  const content = useSelector(getContent);
+  const contentStatus = useSelector(getContentStatus);
+
+  useEffect(() => {
+    dispatch(setContent("reservations"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (contentStatus === "idle") {
+      dispatch(getPageContent("reservations"));
+    }
+  }, [dispatch, contentStatus]);
+
   const openTableId = useSelector(getOpenTableId);
   useEffect(() => {
     if (window && document && openTableId) {
@@ -30,17 +52,7 @@ export default function Reservations() {
             className="d-flex justify-content-center align-items-center"
           ></Col>
           <Col md={6} className="page-text">
-            <h3>Join Us</h3>
-            <h1>We Encourage Reservations</h1>
-            <p>
-              Whether you are celebrating a special occasion or just a night out
-              on the town, please join us in our dining room. If you have any
-              dietary restrictions or allergies please call 303.595.8600 in
-              advance. Our chef can accommodate almost anything with advance
-              notification. We also offer a semi-private dining room and many
-              other options for larger groups, corporate events and lunches.
-              Please visit our private dining page for more information.
-            </p>
+            {ReactHtmlParser(content)}
             <AddressText />
             <SocialLinks />
           </Col>

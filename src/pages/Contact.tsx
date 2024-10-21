@@ -10,7 +10,7 @@ import { getCoordinates } from "@profileStore/profile.slice";
 import {
   getContent,
   getContentStatus,
-  getPageConent,
+  getPageContent,
   setContent,
 } from "@contentStore/content.slice";
 import { useLocation } from "react-router-dom";
@@ -68,7 +68,7 @@ export default function Contact() {
 
   useEffect(() => {
     if (contentStatus === "idle") {
-      dispatch(getPageConent(page));
+      dispatch(getPageContent(page));
     }
   }, [dispatch, contentStatus]);
 

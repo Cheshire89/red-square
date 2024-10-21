@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Collections, ContentRecord, ContentResponse } from "../../pbmodels";
+import { Collections, ContentRecord } from "../../pbmodels";
 import PocketBase from "pocketbase";
 import { ContentRecordState } from "./content.model";
 
 const pb = new PocketBase(process.env.REACT_APP_API_URL);
 
-export const getPageConent = createAsyncThunk(
-  "content/getPageConent",
+export const getPageContent = createAsyncThunk(
+  "content/getPageContent",
   async (pageName: string) => {
     try {
       const data: any = await pb
@@ -45,12 +45,12 @@ const contentSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(getPageConent.pending, (state, action) => {
+      .addCase(getPageContent.pending, (state, action) => {
         state.page_name = action.meta.arg;
         state.status = "loading";
       })
       .addCase(
-        getPageConent.fulfilled,
+        getPageContent.fulfilled,
         (state, { payload }: { payload: ContentRecord }) => {
           state.page_name = payload.page_name;
           state.content = payload.content;
@@ -58,7 +58,7 @@ const contentSlice = createSlice({
           state.status = "succeeded";
         }
       )
-      .addCase(getPageConent.rejected, (state, action) => {
+      .addCase(getPageContent.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
