@@ -50,7 +50,6 @@ const requestCollectionData = (categories: any[]): Promise<RecordModel[]>[] => {
 export const getMenuDataByPageName = createAsyncThunk(
   "menu/getMenuData",
   async (pageName: string) => {
-    // console.log("pagename", pageName);
     try {
       const data: RecordModel[] = await pb
         .collection("menu")
@@ -63,13 +62,9 @@ export const getMenuDataByPageName = createAsyncThunk(
           })
         )
         .then((categories) => {
-          console.log("categories", categories);
           const collections = requestCollectionData(categories);
           if (categories.length) {
-            return Promise.all(collections).then((data) => {
-              console.log("data");
-              return data.flat();
-            });
+            return Promise.all(collections).then((data) => data.flat());
           }
           return Promise.resolve([]);
         });
