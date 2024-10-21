@@ -8,10 +8,13 @@ import "./Home.scss";
 import { ContentBlock } from "../../components/ContentBlock/ContentBlock";
 import { useEffect } from "react";
 import { debounce } from "lodash";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { getOpenTableId } from "@profileStore/profile.slice";
 
 const widgetUrl = (
   theme: "wide" | "standard" = "wide",
-  rid = "3851"
+  rid: string
 ): string => {
   return `//www.opentable.com/widget/reservation/loader?rid=${rid}&domain=com&type=standard&theme=${theme}&lang=en-US&overlay=false&iframe=true`;
 };
@@ -19,6 +22,8 @@ const widgetUrl = (
 let widgetContainer: HTMLElement | null = null;
 
 export default function Home() {
+  const openTableId = useSelector(getOpenTableId);
+
   const appendWidget = debounce(() => {
     let winWidth = window.innerWidth;
     let script;
@@ -26,22 +31,27 @@ export default function Home() {
 
     if (widgetContainer !== null) {
       clearWidget();
-      url = winWidth <= 850 ? widgetUrl("standard") : widgetUrl("wide");
+      url =
+        winWidth <= 850
+          ? widgetUrl("standard", openTableId)
+          : widgetUrl("wide", openTableId);
       script = createScript(url);
       widgetContainer.append(script);
     }
   }, 1000);
 
   useEffect(() => {
-    if (window && document) {
-      widgetContainer = document.getElementById("otWidget");
-      appendWidget();
+    if (openTableId) {
+      if (window && document) {
+        widgetContainer = document.getElementById("otWidget");
+        appendWidget();
+      }
+      window.addEventListener("resize", appendWidget);
     }
-    window.addEventListener("resize", appendWidget);
     return () => {
       window.removeEventListener("resize", appendWidget);
     };
-  }, [appendWidget]);
+  }, [appendWidget, openTableId]);
 
   function createScript(src: string): HTMLScriptElement {
     const script = document.createElement("script");

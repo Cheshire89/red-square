@@ -18,6 +18,7 @@ const initialState: ProfileState = {
   lat: null,
   lng: null,
   hours: null,
+  openTable: null,
 };
 
 const profileSlice = createSlice({
@@ -39,10 +40,17 @@ const profileSlice = createSlice({
     getCoordinates: ({ lat, lng }): { lat: number; lng: number } => {
       return { lat, lng };
     },
+    getOpenTableId: ({ openTable }) => {
+      return openTable;
+    },
   },
 });
 
 export const { setProfile } = profileSlice.actions;
-export const { getAddress, getFormattedNumber, getCoordinates } =
-  profileSlice.selectors;
+export const {
+  getAddress,
+  getFormattedNumber,
+  getCoordinates,
+  getOpenTableId,
+} = profileSlice.selectors;
 export default profileSlice.reducer;

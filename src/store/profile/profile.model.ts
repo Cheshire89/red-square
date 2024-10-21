@@ -13,6 +13,7 @@ export interface ProfileState {
   zip: string;
   lat: number;
   lng: number;
+  openTable: string;
   hours: {
     kitchen: string;
     bar: string;

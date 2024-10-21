@@ -3,21 +3,23 @@ import AddressText from "../components/AddressText/AddressText";
 import SocialLinks from "../components/SocialLinks/SocialLinks";
 import { ContentBlock } from "../components/ContentBlock/ContentBlock";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getOpenTableId } from "@profileStore/profile.slice";
 
 export default function Reservations() {
+  const openTableId = useSelector(getOpenTableId);
   useEffect(() => {
-    if (window && document) {
+    if (window && document && openTableId) {
       const container = document.getElementById("otWidget");
       const script = document.createElement("script");
       script.type = "text/javascript";
-      script.src =
-        "//www.opentable.com/widget/reservation/loader?rid=3851&domain=com&type=standard&theme=standard&lang=en-US&overlay=false&iframe=true";
+      script.src = `//www.opentable.com/widget/reservation/loader?rid=${openTableId}&domain=com&type=standard&theme=standard&lang=en-US&overlay=false&iframe=true`;
 
       if (container) {
         container.appendChild(script);
       }
     }
-  }, []);
+  }, [openTableId]);
   return (
     <ContentBlock background="grey">
       <Container>

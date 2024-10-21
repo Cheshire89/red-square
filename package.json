@@ -23,6 +23,7 @@
     "json-server": "^1.0.0-beta.2",
     "lodash": "^4.17.21",
     "pocketbase": "^0.21.5",
+    "pocketbase-typegen": "^1.2.1",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
@@ -44,7 +45,8 @@
     "start:db": "pocketbase serve --dir ./pocketbase/pb_data",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "typegen": "pocketbase-typegen --db ./pocketbase/pb_data/data.db"
   },
   "eslintConfig": {
     "extends": [
