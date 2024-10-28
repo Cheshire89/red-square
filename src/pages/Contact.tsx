@@ -15,34 +15,35 @@ import {
 } from "@contentStore/content.slice";
 import { useLocation } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
+import { getPrimary } from "../store/theme/theme.slice";
 
 const containerStyle = {
   width: "100%",
   height: "400px",
 };
 
-const styles = [
-  { stylers: [{ hue: "#dd0d0d" }] },
-  {
-    featureType: "road",
-    elementType: "geometry",
-    stylers: [{ lightness: 100 }, { visibility: "simplified" }],
-  },
-  {
-    featureType: "poi.business",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-];
-
-const options = {
-  minZoom: 17,
-  streetViewControl: false,
-  mapTypeControl: false,
-  styles,
-};
-
 export default function Contact() {
+  const primary = useSelector(getPrimary);
+
+  const options = {
+    minZoom: 17,
+    streetViewControl: false,
+    mapTypeControl: false,
+    styles: [
+      { stylers: [{ hue: primary }] },
+      {
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [{ lightness: 100 }, { visibility: "simplified" }],
+      },
+      {
+        featureType: "poi.business",
+        elementType: "labels",
+        stylers: [{ visibility: "off" }],
+      },
+    ],
+  };
+
   const location = useLocation();
   const page = location.pathname.replace("/", "");
   const dispatch = useDispatch<any>();

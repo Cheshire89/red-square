@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ThemeState } from "./theme.model";
 
 const initialState: ThemeState = {
+  primary: null,
   logo: null,
   footerLogo: null,
   id: null,
@@ -19,6 +20,9 @@ const themeSlice = createSlice({
     setTheme: (state, action) => action.payload,
   },
   selectors: {
+    getPrimary: ({ primary }): string => {
+      return primary;
+    },
     getLogo: ({ collectionId, id, logo }): string => {
       return filesUrl(collectionId, id, logo);
     },
@@ -29,5 +33,5 @@ const themeSlice = createSlice({
 });
 
 export const { setTheme } = themeSlice.actions;
-export const { getLogo, getFooterLogo } = themeSlice.selectors;
+export const { getLogo, getFooterLogo, getPrimary } = themeSlice.selectors;
 export default themeSlice.reducer;

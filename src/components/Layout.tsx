@@ -37,9 +37,12 @@ export default function Layout() {
       .getFirstListItem(`profile="${process.env.REACT_APP_ID}"`);
 
     if (theme) {
-      const { logo, footerLogo, id, collectionId, ...other } = theme;
-      setCssVars(other);
-      dispatch(setTheme({ logo, footerLogo, id, collectionId }));
+      const { logo, footerLogo, id, collectionId, primary, ...other } = theme;
+      setCssVars({
+        primary,
+        ...other,
+      });
+      dispatch(setTheme({ logo, footerLogo, id, collectionId, primary }));
     }
   }, [pb, dispatch]);
 

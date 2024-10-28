@@ -41,7 +41,7 @@
     "yarn": "^1.22.22"
   },
   "scripts": {
-    "start": "concurrently \"npm run start.ui\" \"npm run start:db\"",
+    "start": "craco start",
     "start.ui": "craco start",
     "start.server": "npx json-server ./db.json -p 4200",
     "start:db": "pocketbase serve --dir ./pocketbase/pb_data",
