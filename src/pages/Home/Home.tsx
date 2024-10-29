@@ -8,8 +8,15 @@ import "./Home.scss";
 import { ContentBlock } from "../../components/ContentBlock/ContentBlock";
 import { useEffect } from "react";
 import { debounce } from "lodash";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOpenTableId } from "@profileStore/profile.slice";
+import {
+  getContent,
+  getContentStatus,
+  getPageContent,
+  setContent,
+} from "@contentStore/content.slice";
+import ReactHtmlParser from "react-html-parser";
 
 const widgetUrl = (
   theme: "wide" | "standard" = "wide",
@@ -21,6 +28,9 @@ const widgetUrl = (
 let widgetContainer: HTMLElement | null = null;
 
 export default function Home() {
+  const content = useSelector(getContent);
+  const contentStatus = useSelector(getContentStatus);
+  const dispatch = useDispatch<any>();
   const openTableId = useSelector(getOpenTableId);
 
   const appendWidget = debounce(() => {
@@ -38,6 +48,16 @@ export default function Home() {
       widgetContainer.append(script);
     }
   }, 1000);
+
+  useEffect(() => {
+    dispatch(setContent("home"));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (contentStatus === "idle") {
+      dispatch(getPageContent("home"));
+    }
+  }, [dispatch, contentStatus]);
 
   useEffect(() => {
     if (openTableId) {
@@ -81,35 +101,13 @@ export default function Home() {
           <img src={VodkaPourImg} alt="Vodka Pour" />
         </Carousel.Item>
       </Carousel>
-      <ContentBlock background="grey">
-        <Container>
-          <Row>
-            <Col md={6} className="d-flex justify-content-center">
-              <img
-                className="img-fluid d-sm-none d-md-block"
-                src="/pickle_shot.jpg"
-                alt="Pickle shot"
-                style={{
-                  maxWidth: "450px",
-                }}
-              />
-            </Col>
-            <Col md={6}>
-              <h3 className="header text-uppercase">Euro Bistro + Vodka Bar</h3>
-              <p>
-                Our chefs create seasonally inspired menus with both classic and
-                contemporary European food, blending hearty with whimsical. Come
-                enjoy our beautiful courtyard patio, or our warm and inviting
-                modern dining room. We offer an extensive wine list, and over
-                one hundred different vodkas, including in-house infusions.
-                Whether it is a casual cocktail, or a special celebration, small
-                group or a party of one hundred, Red Square is a place to love
-                and keeps you coming back again and again.
-              </p>
-            </Col>
-          </Row>
-        </Container>
-      </ContentBlock>
+      {content && (
+        <>
+          <ContentBlock background="grey">
+            <Container>{ReactHtmlParser(content)}</Container>
+          </ContentBlock>
+        </>
+      )}
       <ContentBlock height="auto">
         <Container>
           <Row>
