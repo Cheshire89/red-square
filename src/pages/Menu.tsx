@@ -15,6 +15,7 @@ import {
   getMenuData,
   getMenuDataByPageName,
   getMenuStatus,
+  getOrder,
   getPage,
   setPage,
 } from "@menuStore/menu.slice";
@@ -24,6 +25,7 @@ export default function Menu() {
   const menuPage = useSelector(getPage);
   const menuData = useSelector(getMenuData);
   const menuStatus = useSelector(getMenuStatus);
+  const menuOrder = useSelector(getOrder);
 
   const { section } = useParams();
 
@@ -37,22 +39,23 @@ export default function Menu() {
     }
   }, [section, menuStatus, dispatch, menuPage]);
 
-  const renderVodka = (data: any) => {
-    return Object.entries(data).map(([title, value]) => {
-      return (
-        <div className="mb-5">
-          <strong>{title}</strong>
-          <ul className="list-unstyled menu-list">
-            {Array.isArray(value) &&
-              value.map((item: VodkaItem, index: number) => {
-                const key = `${title.replace(/\s/g, "")}-${index + 1}`;
-                return <VodkaMenuItem item={item} key={key} />;
-              })}
-          </ul>
-        </div>
-      );
-    });
-  };
+  const renderVodka = (data: any) => (
+    <>
+      {data &&
+        Object.entries(data).map(([title, value]) => (
+          <div className="mb-5">
+            <strong>{title}</strong>
+            <ul className="list-unstyled menu-list">
+              {Array.isArray(value) &&
+                value.map((item: VodkaItem, index: number) => {
+                  const key = `${title.replace(/\s/g, "")}-${index + 1}`;
+                  return <VodkaMenuItem item={item} key={key} />;
+                })}
+            </ul>
+          </div>
+        ))}
+    </>
+  );
 
   const renderFood = (sectionTitle: string, data: any) => (
     <>
@@ -68,20 +71,21 @@ export default function Menu() {
 
   const renderWines = (data: any) => (
     <>
-      {Object.keys(data).map((section, index) => {
-        return (
-          <ul key={section + index} className="list-unstyled">
-            <li className="foodItem">
-              <strong>{section}</strong>
-            </li>
-            {Array.isArray(data[section]) &&
-              data[section].map((item: WineItem, index: number) => {
-                const key = `${section}-${index + 1}`;
-                return <WineMenuItem item={item} key={key} />;
-              })}
-          </ul>
-        );
-      })}
+      {data &&
+        Object.keys(data).map((section, index) => {
+          return (
+            <ul key={section + index} className="list-unstyled">
+              <li className="foodItem">
+                <strong>{section}</strong>
+              </li>
+              {Array.isArray(data[section]) &&
+                data[section].map((item: WineItem, index: number) => {
+                  const key = `${section}-${index + 1}`;
+                  return <WineMenuItem item={item} key={key} />;
+                })}
+            </ul>
+          );
+        })}
     </>
   );
 
@@ -94,11 +98,6 @@ export default function Menu() {
       default:
         return renderFood(sectionTitle, data);
     }
-  };
-
-  const isDrinks = (sectionTitle: string): boolean => {
-    const sections = ["wine", "cocktails"];
-    return sections.includes(sectionTitle);
   };
 
   const dontRenderHeader = (sectionTitle: string): boolean => {
@@ -116,18 +115,19 @@ export default function Menu() {
             : "dinner.jpg"
         }
       />
-      {menuData !== null && (
+      {menuData !== null && menuOrder !== null && (
         <ContentBlock>
           <Container>
             {section === "vodka-bar" && <VodkaBarHeader />}
             <Row>
-              {Object.keys(menuData).map((sectionTitle, index) => (
+              {menuOrder.map((sectionTitle, index) => (
                 <Col className="mt-5" key={sectionTitle + index} xs={12}>
-                  {!dontRenderHeader(sectionTitle) && (
-                    <h3 className="menu__section-header header-spaced">
-                      {sectionTitle}
-                    </h3>
-                  )}
+                  {!dontRenderHeader(sectionTitle) &&
+                    menuData[sectionTitle] && (
+                      <h3 className="menu__section-header header-spaced">
+                        {sectionTitle}
+                      </h3>
+                    )}
 
                   {section && renderSection(sectionTitle, menuData)}
                 </Col>

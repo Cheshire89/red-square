@@ -10,6 +10,7 @@ const initialState: MenuState = {
   data: null,
   status: "idle",
   error: null,
+  order: null,
 };
 
 const pb = new PocketBase(process.env.REACT_APP_API_URL);
@@ -51,7 +52,7 @@ const requestCollectionData = (categories: any[]): Promise<RecordModel[]>[] => {
 
 export const getMenuDataByPageName = createAsyncThunk(
   "menu/getMenuData",
-  async (pageName: string) => {
+  async (pageName: string, { dispatch }) => {
     try {
       const data: RecordModel[] = await pb
         .collection(Collections.Menu)
@@ -61,14 +62,22 @@ export const getMenuDataByPageName = createAsyncThunk(
         .then((menu) =>
           pb.collection("category").getFullList({
             filter: `menu_id?~"${menu.id}"`,
+            sort: `order`,
           })
         )
         .then((categories) => {
+          const order: string[] = categories.reduce((acc, c) => {
+            acc[c.order - 1] = c.name;
+            return acc;
+          }, []);
+          console.log("categories", categories);
+          dispatch(setOrder(order));
+
           const collections = requestCollectionData(categories);
           if (categories.length) {
-            return Promise.all(collections).then((data) =>
-              MenuUtil.parseByCategorySection(data.flat())
-            );
+            return Promise.all(collections).then((data) => {
+              return MenuUtil.parseByCategorySection(data.flat());
+            });
           }
           return Promise.resolve([]);
         });
@@ -89,12 +98,16 @@ const menuSlice = createSlice({
         state.status = "idle";
       }
     },
+    setOrder: (state, action) => {
+      state.order = action.payload;
+    },
   },
   selectors: {
     getPage: ({ page }) => page,
     getMenuData: ({ data }) => data,
     getMenuStatus: ({ status }) => status,
     getMenuError: ({ error }) => error,
+    getOrder: ({ order }) => order,
   },
   extraReducers(builder) {
     builder
@@ -125,7 +138,7 @@ const menuSlice = createSlice({
   },
 });
 
-export const { setPage } = menuSlice.actions;
-export const { getMenuData, getMenuStatus, getMenuError, getPage } =
+export const { setPage, setOrder } = menuSlice.actions;
+export const { getMenuData, getMenuStatus, getMenuError, getPage, getOrder } =
   menuSlice.selectors;
 export default menuSlice.reducer;
