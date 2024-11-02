@@ -91,15 +91,19 @@ export default function Home() {
         <Carousel.Item>
           <img src={RibsImg} alt="Ribs" />
         </Carousel.Item>
-        <Carousel.Item>
-          <img src={InfusedVodkaImg} alt="Infused Vodka" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img src={RestaurantImg} alt="Restaurant Dining Area" />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img src={VodkaPourImg} alt="Vodka Pour" />
-        </Carousel.Item>
+        {process.env.REACT_APP_ID === "eilv81c1e648nhv" && (
+          <>
+            <Carousel.Item>
+              <img src={InfusedVodkaImg} alt="Infused Vodka" />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src={RestaurantImg} alt="Restaurant Dining Area" />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img src={VodkaPourImg} alt="Vodka Pour" />
+            </Carousel.Item>
+          </>
+        )}
       </Carousel>
       {content && (
         <>

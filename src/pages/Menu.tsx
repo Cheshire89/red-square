@@ -122,14 +122,7 @@ export default function Menu() {
             {section === "vodka-bar" && <VodkaBarHeader />}
             <Row>
               {Object.keys(menuData).map((sectionTitle, index) => (
-                <Col
-                  className="mt-5"
-                  key={sectionTitle + index}
-                  xs={12}
-                  sm={{
-                    span: isDrinks(sectionTitle) && section !== "wine" ? 6 : 12,
-                  }}
-                >
+                <Col className="mt-5" key={sectionTitle + index} xs={12}>
                   {!dontRenderHeader(sectionTitle) && (
                     <h3 className="menu__section-header header-spaced">
                       {sectionTitle}
